@@ -1,0 +1,17 @@
+<%= form_for([gns_etl, :backend, schedule]) do |f| %>
+    <div class="form-group">
+        <label class="d-block"><%= t('.name') %> <span class="text-danger">*</span></label>
+        <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if schedule.errors.full_messages_for(:name).present? %>"
+            placeholder="Schedule name"
+            name="schedule[name]"
+            value="<%= schedule.name %>"
+        >
+        <% if schedule.errors.full_messages_for(:name).present? %>
+            <span class="form-text text-danger"><%= schedule.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
+        <% end %>
+    </div>
+    
+    <div class="text-left">
+        <button type="submit" class="btn btn-primary"><%= t('save') %></button>
+    </div>
+<% end %>

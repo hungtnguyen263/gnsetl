@@ -1,0 +1,596 @@
+<div class="tab-pane show active" id="tabContact">
+    <div class="card-group-control card-group-control-left" id="accordion-control">
+
+        <div class="pt-2 pb-2 permissions-box">
+            <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                <h6 class="card-title mb-1">
+                    <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                       href="#gnsContact-contacts"><%= t('.contacts') %>
+                    </a>
+                </h6>
+                <div>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
+                    <i class="icon-primitive-dot text-muted font-size-sm"></i>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all') %></button>
+                </div>
+            </div>
+            
+            <div id="gnsContact-contacts" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.contacts.create]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.contacts.create]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.contacts.create"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contacts.create') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.contacts.create"><%= t('.create_upp') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.create') %></b> <%= t('.a_contact') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.contacts.create.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.contacts.create.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.create.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.contacts.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.contacts.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.contacts.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contacts.read_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.contacts.read_own"><%= t('.read_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view') %></b> <%= t('.their_own_contacts') %></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.contacts.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.contacts.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.contacts.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contacts.read_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.contacts.read_other"><%= t('.read_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view') %></b> <%= t('.other_people_contacts') %></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_contact.contacts.update_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.contacts.update_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.contacts.update_own"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contacts.update_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.contacts.update_own"><%= t('.update_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update') %></b> <%= t('.their_own_contacts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.contacts.update_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.contacts.update_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.update_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_contact.contacts.update_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.contacts.update_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.contacts.update_other"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contacts.update_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.contacts.update_other"><%= t('.update_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update') %></b> <%= t('.other_people_contacts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.contacts.update_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.contacts.update_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.update_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.contacts.delete_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.contacts.delete_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.contacts.delete_own"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contacts.delete_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.contacts.delete_own"><%= t('.delete_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.their_own_contacts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.contacts.delete_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.contacts.delete_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.delete_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.contacts.delete_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.contacts.delete_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.contacts.delete_other"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contacts.delete_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.contacts.delete_other"><%= t('.delete_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.other_people_contacts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.contacts.delete_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.contacts.delete_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.delete_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_contact.contacts.activate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.contacts.activate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.contacts.activate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contacts.activate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.contacts.activate_own"><%= t('.activate_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.their_own_contacts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.contacts.activate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.contacts.activate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.activate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.contacts.activate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.contacts.activate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.contacts.activate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contacts.activate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.contacts.activate_other"><%= t('.activate_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.other_people_contacts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.contacts.activate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.contacts.activate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.activate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.contacts.deactivate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.contacts.deactivate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.contacts.deactivate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contacts.deactivate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.contacts.deactivate_own"><%= t('.de_activate_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.their_own_contacts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.contacts.deactivate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.contacts.deactivate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.deactivate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.contacts.deactivate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.contacts.deactivate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.contacts.deactivate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contacts.deactivate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.contacts.deactivate_other"><%= t('.de_activate_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.other_people_contacts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.contacts.deactivate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.contacts.deactivate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.deactivate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="pt-2 pb-2 permissions-box">
+            <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                <h6 class="card-title mb-1">
+                    <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                       href="#gnsContact-categories"><%= t('.groups') %>
+                    </a>
+                </h6>
+                <div>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
+                    <i class="icon-primitive-dot text-muted font-size-sm"></i>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all') %></button>
+                </div>
+            </div>
+
+            <div id="gnsContact-categories" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_contact.categories.create]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.categories.create]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.categories.create"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.categories.create') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.categories.create"><%= t('.create_upp') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.create') %></b> <%= t('.a_contact_group') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.categories.create.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.categories.create.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.categories.create.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.categories.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.categories.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.categories.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.categories.read_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.categories.read_own"><%= t('.read_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view') %></b> <%= t('.their_own_contacts_groups') %></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.categories.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.categories.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.categories.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.categories.read_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.categories.read_other"><%= t('.read_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view') %></b> <%= t('.other_people_contacts_groups') %></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_contact.categories.update_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.categories.update_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.categories.update_own"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.categories.update_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.categories.update_own"><%= t('.update_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update') %></b> <%= t('.their_own_contacts_groups') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.categories.update_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.categories.update_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.categories.update_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.categories.update_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.categories.update_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.categories.update_other"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.categories.update_other') %>
+                                    >  
+                                  <label class="custom-control-label" for="gns_contact.categories.update_other"><%= t('.update_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update') %></b> <%= t('.other_people_contacts_groups') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.categories.update_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.categories.update_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.categories.update_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.categories.delete_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.categories.delete_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.categories.delete_own"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.categories.delete_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.categories.delete_own"><%= t('.delete_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.their_own_contacts_groups') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.categories.delete_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.categories.delete_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.categories.delete_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.categories.delete_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.categories.delete_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.categories.delete_other"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.categories.delete_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.categories.delete_other"><%= t('.delete_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.other_people_contacts_groups') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.categories.delete_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.categories.delete_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.categories.delete_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_contact.categories.activate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.categories.activate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.categories.activate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.categories.activate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.categories.activate_own"><%= t('.activate_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.their_own_contacts_groups') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.categories.activate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.categories.activate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.categories.activate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.categories.activate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.categories.activate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.categories.activate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.categories.activate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.categories.activate_other"><%= t('.activate_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.other_people_contacts_groups') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.categories.activate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.categories.activate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.categories.activate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.categories.deactivate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.categories.deactivate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.categories.deactivate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.categories.deactivate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.categories.deactivate_own"><%= t('.de_activate_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.their_own_contacts_groups') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.categories.deactivate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.categories.deactivate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.categories.deactivate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_contact.categories.deactivate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_contact.categories.deactivate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_contact.categories.deactivate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.categories.deactivate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_contact.categories.deactivate_other"><%= t('.de_activate_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.other_people_contacts_groups') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_contact.categories.deactivate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_contact.categories.deactivate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_contact.categories.deactivate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

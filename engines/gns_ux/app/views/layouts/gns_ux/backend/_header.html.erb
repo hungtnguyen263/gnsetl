@@ -1,0 +1,26 @@
+<!-- Page header -->
+<div class="page-header page-header-light">
+    <!-- Top breadcrumb line -->
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+        <div class="d-flex">
+            <div class="breadcrumb">
+                <%= yield :breadcrumb %>
+            </div>
+        </div>
+    </div>
+    <!-- /breadcrumb line -->
+    
+    <% if content_for?(:page_title) or content_for?(:page_toolbar) %>
+        <div class="page-header-content header-elements-md-inline">
+            <div class="page-title d-flex">
+                <%= yield :page_title %>
+                <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+            </div>
+            
+            <div class="header-elements d-none">
+                <%= yield :page_toolbar %>
+            </div>
+        </div>
+    <% end %>
+</div>
+<!-- /page header -->

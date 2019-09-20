@@ -1,0 +1,50 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#ID</th>
+            <th>Name</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Status</th>
+            <th>Comment</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @schedules.each do |schedule| %>
+            <tr>
+                <td>#<%= schedule.id %></td>
+                <td><%= schedule.name %></td>
+                <td><%= schedule.start_time.strftime('%d/%m/%Y - %H:%M:%S') if schedule.start_time.present? %></td>
+                <td><%= schedule.end_time.strftime('%d/%m/%Y - %H:%M:%S') if schedule.end_time.present? %></td>
+                <td>
+                    <% if schedule.status == GnsEtl::Schedule::STATUS_NEW %>
+                        <label class="badge badge-primary">New</label>
+                    <% elsif schedule.status == GnsEtl::Schedule::STATUS_INPROCESSING %> 
+                        <label class="badge badge-info">In Processing</label>
+                    <% elsif schedule.status == GnsEtl::Schedule::STATUS_COMPLETE %>
+                        <label class="badge badge-success">Completed</label>
+                    <% elsif schedule.status == GnsEtl::Schedule::STATUS_CANCELED %>
+                        <label class="badge badge-danger">Canceled</label>
+                    <% elsif schedule.status == GnsEtl::Schedule::STATUS_FAILED %>
+                        <label class="badge badge-warning">Not Started</label>
+                    <% end %>
+                </td>
+                <td><%= schedule.comment %></td>
+                <td>
+                    <% if schedule.status == GnsEtl::Schedule::STATUS_NEW %>
+                        <a href="<%= gns_etl.start_backend_schedules_path(id: schedule) %>"
+                            data-method="PUT"
+                            data-confirm="You want to start this schedule"
+                            class="btn btn-sm btn-info ajax datalist-g-link">Start
+                        </a>
+                    <% end %>
+                    <% if schedule.status == GnsEtl::Schedule::STATUS_INPROCESSING %>
+                        <a href="#" class="btn btn-sm btn-warning">Stop</a>
+                    <% end %>
+                    <a href="#" class="btn btn-sm btn-danger">Cancel</a>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

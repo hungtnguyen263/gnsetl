@@ -1,0 +1,74 @@
+vi:
+  home: "Trang chủ"
+  keyword_search: "Tìm theo từ khóa"
+  show_columns: "Ấn/hiện cột"
+  sort_by: "Sắp xếp"
+  per_page: "Hiển thị"
+  go: "Lọc"
+  
+  status: "Trạng thái"
+  created_at: "Ngày tạo"
+  updated_at: "Ngày sửa"
+  actions: "Thao tác"
+  
+  save: "Lưu"
+  cancel: "Hủy"
+  close: "Đóng"
+  active: "Đang kích hoạt"
+  inactive: "Không kích hoạt"
+  male: "Nam"
+  female: "Nữ"
+  high: "Cao"
+  normal: "Bình thường"
+  low: "Thấp"
+  
+  new: "Mới"
+  pending: "Chờ duyệt"
+  in_progress: "Đang thực hiện"
+  done: "Đã hoàn thành"
+  finished: "Đã kết thúc"
+  canceled: "Đã bị hủy"
+  
+  lang:
+    close: "Đóng"
+    ok: "Đồng ý"
+    understand: "Tôi hiểu!"
+    are_you_sure: "Bạn có chắc không?"
+    not_authorized: "Bạn không được phép thực hiện hành động này!"
+  
+  layouts:
+    gns_ux:
+      backend:
+        main:
+          tail_title: "ERP System | SAO-EE JSC"
+        main_navbar:
+          notifications: "Thông báo"
+          mark_all_as_read: "Đánh dấu đã đọc tất cả"
+          see_all: "Xem tất cả"
+          my_account: "Tài khoản của tôi"
+          personal_note: "Ghi chú cá nhân"
+          logout: "Đăng xuất"
+        sidebar:
+          navigation: "Navigation"
+          account_settings: "Cài đặt tài khoản"
+          main_menu: "Menu chính"
+          dashboard: "Bảng điều khiển"
+          contact: "Khách hàng"
+          contacts: "Địa chỉ liên hệ"
+          contact_categories: "Nhóm khách hàng"
+          project: "Dự án"
+          projects: "Danh sách dự án"
+          project_types: "Loại dự án"
+          project_roles: "Vai trò dự án (mặc định)"
+          employee: "Nhân viên"
+          employees: "Danh sách nhân viên"
+          advanced: "Nâng cao"
+          report: "Báo cáo/Thống kê"
+          system: "Hệ thống"
+          configure_user_roles: "Vai trò người dùng"
+          project_report: "Dự án theo khách hàng"
+          employee_report: "Nhân viên tham gia dự án"
+          gantt_chart: "Theo dõi công việc của nhân viên (biểu đồ Gantt)"
+        footer:
+          support: "Hỗ trợ"
+          user_guide: "Hướng dẫn"

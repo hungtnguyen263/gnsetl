@@ -1,0 +1,237 @@
+<% content_for :title do %>
+    <%= t('.my_account') %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('.home') %></a>
+    <span class="breadcrumb-item active"><%= t('.my_account') %></span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-users mr-2"></i> <span class="font-weight-semibold"><%= t('.my_account') %></span></h4>
+<% end %>
+
+<!-- Inner container -->
+<div class="d-flex align-items-start flex-column flex-md-row">
+
+    <!-- Left content -->
+    <div class="tab-content w-100 overflow-auto order-2 order-md-1">
+        
+        <!-- Profile info -->
+        <div class="card">
+            <div class="card-header bg-transparent header-elements-inline">
+                <h5 class="card-title"><%= t('.profile_information') %></h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <% if @profile.present? %>
+                    <%= form_for '', url: gns_core.update_profile_backend_accounts_path do |f| %>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label><%= t('.fullname') %></label>
+                                    <input type="text" readonly="readonly" value="<%= @profile.name %>" class="form-control font-weight-semibold">
+                                </div>
+                                <div class="col-md-3">
+                                    <label><%= t('.gender') %></label>
+                                    <input type="text" readonly="readonly" value="<%= t("#{@profile.gender}") %>" class="form-control font-weight-semibold">
+                                </div>
+                                <div class="col-md-3">
+                                    <label><%= t('.date_of_birth') %></label>
+                                    <input type="text" readonly="readonly" value="<%= @profile.birthday.strftime("%d/%m/%Y") if @profile.birthday.present? %>" class="form-control font-weight-semibold">
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label><%= t('.deparment') %></label>
+                                    <input type="text" readonly="readonly" value="<%= @profile.department %>" class="form-control font-weight-semibold">
+                                </div>
+                                <div class="col-md-6">
+                                    <label><%= t('.position') %></label>
+                                    <input type="text" readonly="readonly" value="<%= @profile.position %>" class="form-control font-weight-semibold">
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label><%= t('.labor_contract_type') %></label>
+                                    <input type="text" readonly="readonly" value="<%= t("#{@profile.labor_contract_type}") if @profile.labor_contract_type.present? %>" class="form-control font-weight-semibold">
+                                </div>
+                                <div class="col-md-6">
+                                    <label><%= t('.starting_date') %></label>
+                                    <input type="text" readonly="readonly" value="<%= @profile.starting_date.strftime("%d/%m/%Y") if @profile.starting_date.present? %>" class="form-control font-weight-semibold">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <fieldset>
+                            <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700"><%= t('.additional_information') %></span></legend>
+    
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label><%= t('.telephone') %></label>
+                                        <input type="text" name="profile[phone]" value="<%= @profile.phone %>" class="form-control font-weight-semibold">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label><%= t('.mobile') %></label>
+                                        <input type="text" name="profile[mobile]" value="<%= @profile.mobile %>" class="form-control font-weight-semibold">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Email</label>
+                                        <input type="text" name="profile[email]" value="<%= @profile.email %>" class="form-control font-weight-semibold">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="d-block"><%= t('.country') %></label>
+                                        <select class="form-control font-weight-semibold select-ajax"
+                                            data-container-css-class="font-weight-semibold"
+                                            data-placeholder="<%= t('.choose_country') %>"
+                                            data-url="<%= gns_area.select2_backend_countries_path %>"
+                                            name="profile[country_id]"
+                                        >
+                                            <option value="<%= @profile.country_id %>"><%= @profile.country_name %></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="d-block"><%= t('.state_province') %></label>
+                                        <select class="form-control font-weight-semibold select-ajax"
+                                            data-container-css-class="font-weight-semibold"
+                                            data-placeholder="<%= t('.choose_state_province') %>"
+                                            data-url="<%= gns_area.select2_backend_states_path %>"
+                                            name="profile[state_id]"
+                                        >
+                                            <option value="<%= @profile.state_id %>"><%= @profile.state_name %></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="d-block"><%= t('.district_town_city') %></label>
+                                        <select class="form-control font-weight-semibold select-ajax"
+                                            data-container-css-class="font-weight-semibold"
+                                            data-placeholder="<%= t('.choose_district_town_city') %>"
+                                            data-url="<%= gns_area.select2_backend_districts_path %>"
+                                            name="profile[district_id]"
+                                        >
+                                            <option value="<%= @profile.district_id %>"><%= @profile.district_name %></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="d-block"><%= t('.address') %></label>
+                                <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.enter_address') %>Enter address"
+                                    name="profile[address]"
+                                    value="<%= @profile.address %>"
+                                >
+                            </div>
+                            
+                        </fieldset>
+    
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary"><%= t('.update_info') %></button>
+                        </div>
+                    <% end %>
+                <% else %>
+                    <div class="alert alert-warning border-0 alert-dismissible text-center mb-0">
+                        <%= t('.alert') %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <!-- /profile info -->
+        
+    </div>
+    <!-- /left content -->
+
+
+    <!-- Right sidebar component -->
+    <div class="sidebar sidebar-light bg-transparent sidebar-component sidebar-component-right wmin-300 border-0 shadow-0 order-1 order-md-2 sidebar-expand-md">
+
+        <%= render "sidebar", title: 'Profile information' %>
+
+    </div>
+    <!-- /right sidebar component -->
+
+</div>
+<!-- /inner container -->
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            // Select2 ajax
+            $('select[name="profile[state_id]"]').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    dropdownParent: $(this).parent(),
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                country_id: $('select[name="profile[country_id]"]').select2('val'),
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            
+            $('select[name="profile[district_id]"]').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    dropdownParent: $(this).parent(),
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                state_id: $('select[name="profile[state_id]"]').select2('val')
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            
+            $('select[name="profile[state_id]"]').change(function() {
+                $('select[name="profile[district_id]"]').val(null).trigger('change');
+            });
+            
+            $('select[name="profile[country_id]"]').change(function() {
+                $('select[name="profile[state_id]').val(null).trigger('change');
+                $('select[name="profile[district_id]').val(null).trigger('change');
+            });
+        });
+    </script>
+<% end %>

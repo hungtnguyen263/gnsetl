@@ -1,0 +1,83 @@
+<% @todo_list = GnsProject::Task.get_todo_list(current_user.employee).order('updated_at desc') %>
+
+<div class="card">
+    <div class="card-header header-elements-sm-inline">
+        <h6 class="card-title"><%= t('.todo_list') %></h6>
+        <div class="header-elements">
+            <span class="badge bg-success badge-pill"><%= @todo_list.count %> <%= t('.task_s') %></span>
+            
+            <div class="list-icons ml-3">
+                <a href="#" class="list-icons-item"><i class="icon-sync"></i></a>
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-nowrap"><%= t('.tasks') %></th>
+                <th class="text-nowrap"><%= t('.remark') %></th>
+                <th class="text-nowrap"><%= t('.status') %></th>
+                <th class="text-nowrap"><%= t('.updated_at') %></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @todo_list.each do |task| %>
+                <tr>
+                    <td>
+                        <a href="<%= gns_project.backend_task_path(task) %>"
+                           data-popup="tooltip" data-original-title="Go to task"
+                        >
+                            <span class="text-default font-weight-semibold"
+                            ><%= task.name %> <i class="icon-new-tab2 text-primary"></i>
+                            </span>
+                        </a>
+                        
+                        <div class="text-muted font-size-sm">
+                            <span class="inline-ellipse-list-item-50" data-popup="tooltip" data-original-title="<%= task.project.name %>"><%= task.project.name %></span>
+                            <span class="inline-ellipse-list-item-50" data-popup="tooltip" data-original-title="<%= task.stage_name %>"><i class="icon-arrow-right22"></i><%= task.stage_name %></span>
+                        </div>
+                    </td>
+                    <td>
+                        <%= task.get_latest_remark_log %>
+                    </td>
+                    <td>
+                        <% if task.status == GnsProject::Task::STATUS_OPEN %>
+                            <div class="text-muted font-size-sm text-nowrap"><span class="badge badge-mark border-blue mr-1"></span> <%= t('.opening') %></div>
+                        <% end %>                        
+                        
+                        <% if task.finished? %>
+                            <div class="text-muted font-size-sm text-nowrap"><span class="badge badge-mark border-success mr-1"></span> <%= t('.finished') %></div>
+                        <% else %>
+                            <div class="text-muted font-size-sm text-nowrap"><span class="badge badge-mark border-danger mr-1"></span> <%= t('.working') %></div>
+                        <% end %>
+                    </td>
+                    <td>
+                        <%= task.updated_at.strftime("%d/%m/%Y") %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <% if @todo_list.empty? %>
+        <div class="alert text-center text-warning mb-0">
+            <%= t('.alert') %>
+        </div>
+    <% end %>
+</div>
+
+<% content_for :page_script do %>
+    <script>
+        var task_detail_modal = new gModal({size: 'lg'});
+        var task_detail_callback;
+        
+        $(function() {
+            $(document).on('click', '.show-task-detail-button', function(e) {
+                e.preventDefault();
+                
+                task_detail_modal.load($(this).attr('href'));
+            });
+        });
+    </script>
+<% end %>

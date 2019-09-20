@@ -1,0 +1,239 @@
+<% content_for :title do %>
+    User
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <span class="breadcrumb-item active">Users</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-users mr-2"></i> <span class="font-weight-semibold">User</span></h4>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <% if can? :create, GnsCore::User %>
+        <a class="btn btn-primary add-user-button" href="<%= gns_core.new_backend_user_path %>">
+            <b><i class="icon-plus22"></i></b> Create New User
+        </a>
+    <% end %>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        var user_modal = new gModal({size: 'md'});
+        var updateUserCallback;
+        var newUserCallback;
+        
+        $(function() {            
+            $('.add-user-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                user_modal.load(button.attr('href'));
+                
+                newUserCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // hide modal
+                        user_modal.hide();
+                        
+                        datalists[$('.datalist-users').attr('data-id')].refresh();          
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        user_modal.renderHtml(response);
+                    }
+                };
+            });
+            
+            $(document).on('click', '.edit-user-button', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                // load modal edit category
+                user_modal.load(button.attr('href'));
+                
+                // after update user event
+                updateUserCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // hide modal
+                        user_modal.hide();
+                        
+                        datalists[button.closest('.datalist').attr('data-id')].refresh();
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        user_modal.renderHtml(response);
+                    }           
+                };
+                    
+            });
+        });
+        
+        
+        //$(document).ready(function() {
+        //    
+        //    // Select2 ajax
+        //    $('[name=country_id]').each(function() {
+        //        var url = $(this).attr('data-url');
+        //        
+        //        $(this).select2({
+        //            allowClear: true,
+        //            ajax: {
+        //                url: url,
+        //                dataType: 'json',
+        //                data: function (params) {
+        //                    console.log(params);
+        //                    var query = {
+        //                        q: params.term,
+        //                        page: params.page,
+        //                        type: 'public',
+        //                    }
+        //              
+        //                    // Query parameters will be ?search=[term]&type=public
+        //                    return query;
+        //                }
+        //            }
+        //        }); 
+        //    });
+        //    
+        //    $('[name=state_id]').each(function() {
+        //        var url = $(this).attr('data-url');
+        //        
+        //        $(this).select2({
+        //            allowClear: true,
+        //            ajax: {
+        //                url: url,
+        //                dataType: 'json',
+        //                data: function (params) {
+        //                    console.log(params);
+        //                    var query = {
+        //                        q: params.term,
+        //                        page: params.page,
+        //                        type: 'public',
+        //                        country_id: $('[name=country_id]').select2('val')
+        //                    }
+        //              
+        //                    // Query parameters will be ?search=[term]&type=public
+        //                    return query;
+        //                }
+        //            }
+        //        }); 
+        //    });
+        //    
+        //    $('[name=district_id]').each(function() {
+        //        var url = $(this).attr('data-url');
+        //        
+        //        $(this).select2({
+        //            allowClear: true,
+        //            ajax: {
+        //                url: url,
+        //                dataType: 'json',
+        //                data: function (params) {
+        //                    console.log(params);
+        //                    var query = {
+        //                        q: params.term,
+        //                        page: params.page,
+        //                        type: 'public',
+        //                        state_id: $('[name=state_id]').select2('val')
+        //                    }
+        //              
+        //                    // Query parameters will be ?search=[term]&type=public
+        //                    return query;
+        //                }
+        //            }
+        //        }); 
+        //    });
+        //    
+        //    $('[name=state_id]').change(function() {
+        //        $('[name=district_id]').val(null).trigger('change');
+        //    });
+        //    
+        //    $('[name=country_id]').change(function() {
+        //        $('[name=state_id]').val(null).trigger('change');
+        //        $('[name=district_id]').val(null).trigger('change');
+        //    });
+        //});
+    </script>
+<% end %>
+<!-- Datatable -->
+<div class="card datalist datalist-users"
+    data-url="<%= gns_core.list_backend_users_path %>"
+>
+    <div class="card-header header-elements-inline">
+        <h5 class="card-title">User list</h5>
+        <div class="header-elements">
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    
+    <form class="datalist-filters">
+        <div class="card-body pb-0">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="active" data-placeholder="Filter by status..."
+                            class="form-control selectAllowClear" data-fouc>
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="role_ids[]" data-placeholder="Filter by roles..."
+                          class="form-control select-ajax" multiple
+                          data-url="<%= gns_core.select2_backend_roles_path %>">
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 text-right">
+                    <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-body">
+            <div class="datalist-header flex space-between">
+                <div class="text-left text-nowrap flex">
+                    <div class="keyword-search flex align-center mr-3">
+                        <input class="form-control keyword-input" name="keyword" type="search" placeholder="Type to filter...">
+                    </div>
+                </div>
+                <div class="text-right text-nowrap flex">
+                    <div class="sort-by-box flex align-center mr-3">
+                        <span class="mr-1">Sort by:</span>
+                        <select name="sort_by" data-placeholder="Sort by..." class="form-control selectPrimary sort-by-select">
+                            <option value="created_at">created_at</option>
+                            <option value="code">code</option>
+                            <option value="first_name">first_name</option>
+                            <option value="last_name">last_name</option>
+                        </select>
+                        <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
+                    </div>
+                    <div class="show-per-page flex align-center">
+                        <span class="mr-1">Per page:</span>
+                        <select name="per_page" class="form-control selectPrimary per-page-select">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="datalist-content">
+            
+        </div>
+    </form>
+</div>

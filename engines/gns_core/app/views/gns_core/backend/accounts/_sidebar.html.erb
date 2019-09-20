@@ -1,0 +1,73 @@
+<!-- Sidebar content -->
+<div class="sidebar-content">
+
+    <!-- User card -->
+    <div class="card">
+        <div class="card-body text-center">
+            <div class="card-img-actions d-inline-block mb-3">
+                <img class="img-fluid rounded-circle"
+                     src="<%= current_user.avatar.present? ? current_user.avatar.avatar_400_400 : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
+                     width="170" height="170" alt=""
+                >
+                <div class="card-img-actions-overlay card-img rounded-circle">
+                    <a href="<%= current_user.avatar.present? ? current_user.avatar : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
+                        class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round"
+                        data-popup="lightbox">
+                        <i class="icon-plus3"></i>
+                    </a>
+                </div>
+            </div>
+
+            <h6 class="font-weight-semibold mb-0"><%= current_user.name %></h6>
+            <span class="d-block text-muted"><%= current_user.email %></span>
+        </div>
+    </div>
+    <!-- /user card -->
+
+    <!-- Navigation -->
+    <div class="card">
+        <div class="card-header bg-transparent header-elements-inline">
+            <span class="card-title font-weight-semibold"> <%= t('.navigation') %></span>
+            <div class="header-elements">
+                <div class="list-icons">
+                    <a class="list-icons-item" data-action="collapse"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+            <ul class="nav nav-sidebar my-2">
+                <li class="nav-item">
+                    <a href="<%= gns_core.my_profile_backend_accounts_path %>"
+                       class="nav-link"
+                       data-menu="gns_core/backend/accounts/my_profile"
+                    >
+                        <i class="icon-user"></i>
+                         <%= t('.my_profile') %>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<%= gns_core.my_account_backend_accounts_path %>"
+                       class="nav-link"
+                       data-menu="gns_core/backend/accounts/my_account"
+                    >
+                        <i class="icon-cog5"></i>
+                        <%= t('.accounts_settings') %>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<%= gns_core.my_notes_backend_accounts_path %>"
+                       class="nav-link"
+                       data-menu="gns_core/backend/accounts/my_notes"
+                    >
+                        <i class="icon-notebook"></i>
+                        <%= t('.personal_note') %>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /navigation -->
+
+</div>
+<!-- /sidebar content -->

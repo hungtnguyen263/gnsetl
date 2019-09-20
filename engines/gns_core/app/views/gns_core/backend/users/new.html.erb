@@ -1,0 +1,74 @@
+<% content_for :title do %>
+    <%= t(".create_new_user") %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i><%= t("home") %></a>
+    <a href="<%= gns_contact.backend_contacts_path %>" class="breadcrumb-item">Users</a>
+    <span class="breadcrumb-item active">Create</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-users mr-2"></i> <span class="font-weight-semibold">User</span> - Create</h4>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.new_user').submit(function(e) {
+                e.preventDefault();
+                
+                var form = $(this);
+                var formData = new FormData($(this)[0]);
+                formData.append('layout', 'modal');
+                
+                // clear modal
+                user_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                }).done(function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                      showNotification(response.status, response.message);
+                      user_modal.hide();
+                      
+                      // load task list
+                      if (typeof(new_user_callback) !== 'undefined') {
+                        new_user_callback();
+                      }
+                    } else {
+                      user_modal.renderHtml(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+        
+<% if @user.errors.any? %>
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+        <span class="font-weight-semibold">Oh snap!</span> Check a few things up (below) and try submitting again.
+    </div>
+<% end %>
+
+<div class="card">
+    <div class="card-header header-elements-inline bg-white">
+        <h5 class="card-title"><%= t(".details") %></h5>
+        <div class="header-elements">
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <%= render 'form', user: @user %>
+    </div>
+</div>

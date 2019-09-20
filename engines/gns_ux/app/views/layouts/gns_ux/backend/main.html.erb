@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title><%= yield(:title) %></title>
+    
+    <%= csrf_meta_tags %>
+	
+	<!--Favicons-->
+	<link rel="shortcut icon" href="/gns_ux/assets/backend/images/fav/favicon.ico?v=1.0">
+
+	<!-- Global stylesheets -->
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" %>
+    <%= stylesheet_link_tag "/gns_ux/assets/backend/global/css/icons/icomoon/styles.css" %>
+    <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/bootstrap.min.css" %>
+    <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/bootstrap_limitless.min.css" %>
+    <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/layout.min.css" %>
+    <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/components.min.css" %>
+    <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/colors.min.css" %>
+	<%= stylesheet_link_tag '/gns_ux/assets/backend/lib/daterangepicker/daterangepicker.css' %>
+	<!-- /global stylesheets -->
+	
+	<!-- GNSAPP stylesheets -->
+	<%= stylesheet_link_tag "/gns_ux/assets/backend/css/gnsapp.css" %>
+	<!-- /gnsapp stylesheets -->
+	
+	<!-- page stylesheets -->
+	<%= yield :page_stylesheets %>
+	<!-- /page stylesheets -->
+    
+    <!-- Core JS files -->
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/main/jquery.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/main/bootstrap.bundle.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/loaders/blockui.min.js' %>
+	<!-- /core JS files -->
+	
+	<!-- Theme JS files -->	
+	<%= javascript_include_tag '/gns_ux/assets/backend/js/app.js' %>
+    <%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/ui/moment/moment.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/forms/styling/uniform.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/forms/selects/select2.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/forms/selects/bootstrap_multiselect.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/notifications/pnotify.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/uploaders/fileinput/fileinput.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/forms/styling/switchery.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/forms/styling/switch.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/sliders/ion_rangeslider.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/media/fancybox.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/lib/daterangepicker/daterangepicker.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/visualization/echarts/echarts.min.js'  %>
+	<!-- /theme JS files -->
+	
+	<script>
+		var current_controller = '<%= controller_path %>';
+		var current_action = '<%= action_name %>';
+		var full_path = current_controller + '/' + current_action;
+		
+		var LANG_ARE_YOU_SURE = '<%= t('lang.are_you_sure') %>';
+		var LANG_CLOSE = '<%= t('lang.close') %>';
+		var LANG_OK = '<%= t('lang.ok') %>';
+		var LANG_UNDERSTAND = '<%= t('lang.understand') %>';
+		var LANG_NOT_AUTHORIZED = '<%= t('lang.not_authorized') %>';
+	</script>
+	
+	<!-- GNSAPP JS files -->
+	<%= javascript_include_tag '/gns_ux/assets/backend/js/gnsapp.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/js/datalist.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/js/modal.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/js/ajaxBox.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/js/link.js' %>
+	<!-- /gnsapp JS files -->
+</head>
+
+<body class="navbar-top">
+	
+	<%= render "layouts/gns_ux/backend/main_navbar" %>
+
+	<!-- Page content -->
+	<div class="page-content">
+
+		<%= render "layouts/gns_ux/backend/sidebar" %>
+
+		<!-- Main content -->
+		<div class="content-wrapper">
+
+			<%= render "layouts/gns_ux/backend/header" %>
+
+			<!-- Content area -->
+			<div class="content">
+                
+                <%= yield %>
+
+			</div>
+			<!-- /content area -->
+
+			<%= render "layouts/gns_ux/backend/footer" %>
+
+		</div>
+		<!-- /main content -->
+
+	</div>
+	<!-- /page content -->
+	
+	<%= render 'layouts/gns_ux/backend/flash_messages' %>
+	
+	<%= yield :page_script %>
+</body>
+</html>

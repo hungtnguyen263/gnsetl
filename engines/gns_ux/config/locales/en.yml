@@ -1,0 +1,74 @@
+en:
+  home: "Home"
+  keyword_search: 'Type to filter...'
+  show_columns: "Show columns"
+  sort_by: "Sort by"
+  per_page: "Per page"
+  go: "Go"
+  
+  status: "Status"
+  created_at: "Created date"
+  updated_at: "Updated date"
+  actions: "Actions"
+  
+  save: "Save"
+  cancel: "Cancel"
+  close: "Close"
+  active: "Active"
+  inactive: "Inactive"
+  male: "Male"
+  female: "Female"
+  high: "High"
+  normal: "Normal"
+  low: "Low"
+  
+  new: "New"
+  pending: "Pending"
+  in_progress: "In Progress"
+  done: "Done"
+  finished: "Finished"
+  canceled: "Canceled"
+  
+  lang:
+    close: "Close"
+    ok: "OK"
+    understand: "I understand!"
+    are_you_sure: "Are you sure?"
+    not_authorized: "You are not authorized to perform this action!"
+  
+  layouts:
+    gns_ux:
+      backend:
+        main:
+          tail_title: "ERP System | SAO-EE JSC"
+        main_navbar:
+          notifications: "Notifications"
+          mark_all_as_read: "Mark All as Read"
+          see_all: "See All"
+          my_account: "My account"
+          personal_note: "Personal note"
+          logout: "Logout"
+        sidebar:
+          navigation: "Navigation"
+          account_settings: "Account Settings"
+          main_menu: "Main menu"
+          dashboard: "Dashboard"
+          contact: "Business Partner"
+          contacts: "Contact list"
+          contact_categories: "Contact groups"
+          project: "Project"
+          projects: "Project list"
+          project_types: "Project types"
+          project_roles: "Project roles (default)"
+          employee: "Employee"
+          employees: "Employees"
+          advanced: "Advanced"
+          report: "Report"
+          system: "System"
+          configure_user_roles: "Configure User Roles"
+          project_report: "Customer's project"
+          employee_report: "Employee's project"
+          gantt_chart: "Employee's tasks (Gantt chart)"
+        footer:
+          support: "Support"
+          user_guide: "User Guide"

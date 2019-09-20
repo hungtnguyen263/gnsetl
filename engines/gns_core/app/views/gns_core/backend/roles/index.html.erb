@@ -1,0 +1,144 @@
+<% content_for :title do %>
+     <%= t('.system_role') %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('.home') %></a>
+    <span class="breadcrumb-item active"><%= t('.system_role') %></span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t('.system_role') %></span></h4>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <% if can? :create, GnsCore::Role %>
+        <a class="btn btn-primary add-role-button" href="<%= gns_core.new_backend_role_path %>">
+            <b><i class="icon-plus22"></i></b> <%= t('.create_system_role') %>
+        </a>
+    <% end %>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        // global modal
+        var role_modal = new gModal({size: 'md'});
+        var updateRoleCallback;
+        var newRoleCallback;
+        
+        $(function() {            
+            $('.add-role-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                role_modal.load(button.attr('href'));
+                
+                newRoleCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // hide modal
+                        role_modal.hide();
+                        
+                        datalists[$('.datalist-roles').attr('data-id')].refresh();          
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        role_modal.renderHtml(response);
+                    }
+                };
+            });
+            
+            $(document).on('click', '.edit-role-button', function(e) {
+                e.preventDefault();
+                
+                var but = $(this);
+                
+                // load modal edit
+                role_modal.load(but.attr('href'));
+                
+                // after update event
+                updateRoleCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // hide modal
+                        role_modal.hide();
+                        
+                        datalists[but.closest('.datalist').attr('data-id')].refresh();
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        role_modal.renderHtml(response);
+                    }           
+                }
+                    
+            });
+        });
+    </script>
+<% end %>
+
+<!-- Datatable -->
+<div class="card datalist datalist-roles"
+    data-url="<%= gns_core.list_backend_roles_path %>"
+>
+    <div class="card-header header-elements-inline">
+        <h5 class="card-title"><%= t('.role_list') %></h5>
+        <div class="header-elements">
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    
+    <form class="datalist-filters">
+        <div class="card-body pb-0">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="active" data-placeholder="Filter by status..."
+                            class="form-control selectAllowClear">
+                            <option value="true"><%= t('active') %></option>
+                            <option value="false"><%= t('inactive') %></option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-1 text-right">
+                    <span class="btn btn-primary mb-3 datalist-search-button"><%= t('.go') %></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-body">
+            <div class="datalist-header flex space-between">
+                <div class="keyword-search mr-2">
+                    <input class="form-control keyword-input" name="keyword" type="search" placeholder="<%= t('.type_to_filter') %>">
+                </div>
+                <div class="text-right text-nowrap flex">
+                    <div class="sort-by-box flex align-center mr-3">
+                        <span class="mr-1"><%= t('.sort_by') %>:</span>
+                        <select name="sort_by" data-placeholder="Sort by..." class="form-control selectPrimary sort-by-select" data-fouc>
+                            <option value="created_at"><%= t('.created_at') %></option>
+                            <option value="name"><%= t('.name') %></option>
+                        </select>
+                        <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
+                    </div>
+                    <div class="show-per-page flex align-center">
+                        <span class="mr-1"><%= t('.per_page') %>:</span>
+                        <select name="per_page" class="form-control selectPrimary per-page-select">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>  
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="datalist-content">
+            
+        </div>
+    </form>
+</div>

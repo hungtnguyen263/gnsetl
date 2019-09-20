@@ -1,0 +1,275 @@
+<% content_for :title do %>
+    Data Transfers
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <span class="breadcrumb-item active">Data Transfers</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-users mr-2"></i> <span class="font-weight-semibold">Data Transfer</span></h4>
+<% end %>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="panel-inside-title">Source Infomation</h3>
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Server Name</label>
+                                <input type="text" class="form-control" placeholder="Server name" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Database</label>
+                                <input type="text" class="form-control" placeholder="Database name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Login</label>
+                                <input type="email" class="form-control" placeholder="Your email address" />
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" placeholder="Your password" />
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-success pull-right">Start</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="panel-inside-title">Destination Infomation</h3>
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Server Name</label>
+                                <input type="text" class="form-control" placeholder="Server name" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Database</label>
+                                <input type="text" class="form-control" placeholder="Database name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Login</label>
+                                <input type="email" class="form-control" placeholder="Your email address" />
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" placeholder="Your password" />
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-success pull-right">Load</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-body">
+        <h3 class="panel-inside-title">Mapping Infomation</h3>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th colspan="3">Source table: Product</th>
+                    <th colspan="3">Target table: product</th>
+                </tr>
+                <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Default value</th>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Default value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>id</td>
+                    <td>int</td>
+                    <td>not null</td>
+                    <td>id</td>
+                    <td>integer</td>
+                    <td>not null</td>
+                </tr>
+                <tr>
+                    <td>pname</td>
+                    <td>nvarchar</td>
+                    <td>not null</td>
+                    <td>name</td>
+                    <td>string</td>
+                    <td>not null</td>
+                </tr>
+                <tr>
+                    <td>price</td>
+                    <td>float</td>
+                    <td>0</td>
+                    <td>price</td>
+                    <td>decimal</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>unit</td>
+                    <td>varchar</td>
+                    <td></td>
+                    <td>unit</td>
+                    <td>string</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>note</td>
+                    <td>nvarchar</td>
+                    <td></td>
+                    <td>description</td>
+                    <td>text</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th colspan="3">Source table: Product</th>
+                    <th colspan="3">Target table: product</th>
+                </tr>
+                <tr>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Default value</th>
+                    <th>Field</th>
+                    <th>Type</th>
+                    <th>Default value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>id</td>
+                    <td>int</td>
+                    <td>not null</td>
+                    <td>id</td>
+                    <td>integer</td>
+                    <td>not null</td>
+                </tr>
+                <tr>
+                    <td>pname</td>
+                    <td>nvarchar</td>
+                    <td>not null</td>
+                    <td>name</td>
+                    <td>string</td>
+                    <td>not null</td>
+                </tr>
+                <tr>
+                    <td>price</td>
+                    <td>float</td>
+                    <td>0</td>
+                    <td>price</td>
+                    <td>decimal</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>unit</td>
+                    <td>varchar</td>
+                    <td></td>
+                    <td>unit</td>
+                    <td>string</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>note</td>
+                    <td>nvarchar</td>
+                    <td></td>
+                    <td>description</td>
+                    <td>text</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card datalist datalist-schedules"
+    data-url="<%= gns_etl.list_backend_schedules_path %>"
+>
+    <div class="card-header header-elements-inline">
+        <h3 class="card-title"><%= 'Schedules' %></h3>
+        
+        <div class="header-elements">
+            <a href="<%= gns_etl.new_backend_schedule_path %>"
+                class="btn btn-sm bg-blue add-schedule-button mr-5">
+                <i class="icon-plus22 mr-1"></i> New Schedule
+            </a>
+            
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    
+    <form class="datalist-filters">
+        <div class="datalist-content">
+            
+        </div>
+    </form>
+</div>
+
+<% content_for :page_script do %>
+    <script>
+        // global modal cho việc tạo mới stage
+        var schedule_modal = new gModal({size: 'sm'});
+        var newScheduleCallback;
+        
+        $(function() {            
+            $('.add-schedule-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                schedule_modal.load(button.attr('href'));
+                
+                newScheduleCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // hide modal
+                        schedule_modal.hide();
+                        
+                        datalists[$('.datalist-schedules').attr('data-id')].refresh();          
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        contact_category_modal.renderHtml(response);
+                    }
+                };
+            });
+        });
+    </script>
+<% end %>

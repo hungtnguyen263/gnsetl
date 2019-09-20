@@ -1,0 +1,94 @@
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-info-700">
+            <th><%= t('.role_name') %></th>
+            <th class="text-center"><%= t('.permissions') %></th>
+            <th><%= t('.status') %></th>
+            <th><%= t('.created_at') %></th>
+            <th class="text-right"><%= t('.actions') %></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @roles.each do |role| %>
+            <tr>
+                <td><%= role.name %></td>
+                <td class="text-center"><%= role.roles_permissions.count %></td>
+                <td>
+                    <%= display_active(role.active) %>
+                </td>
+                <td title="<%= role.created_at.strftime("%d/%m/%Y - %T") %>">
+                    <%= role.created_at.strftime("%d/%m/%Y") %>
+                </td>
+                <td class="text-right">
+                    <div class="list-icons">
+                        <% if (can? :set_permissions, role) or (can? :update, role) or (can? :delete, role) or
+                                (can? :activate, role) or (can? :deactivate, role) %>
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+    
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <% if can? :set_permissions, role %>
+                                        <a class="dropdown-item"
+                                            href="<%= gns_core.roles_permissions_backend_roles_path(role) %>">
+                                            <i class="icon-gear"></i> <%= t('.settings_permissions') %>
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :update, role %>
+                                        <a class="dropdown-item edit-role-button"
+                                            href="<%= gns_core.edit_backend_role_path(role) %>">
+                                            <i class="icon-pencil7"></i> <%= t('.update_info') %>
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :activate, role %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_core.activate_backend_roles_path(id: role) %>"
+                                            data-method="PUT"
+                                            data-confirm="<%= t('.activate_confirm') %>"
+                                        >
+                                            <i class="icon-checkmark4"></i> <%= t('.activate') %>
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :deactivate, role %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_core.deactivate_backend_roles_path(id: role) %>"
+                                            data-method="PUT"
+                                            data-confirm="<%= t('.deactivate_confirm') %>"
+                                        >
+                                            <i class="icon-blocked"></i> <%= t('.de_activate') %>
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :delete, role %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_core.backend_role_path(role) %>"
+                                            data-method="DELETE"
+                                            data-confirm="<%= t('.delete_confirm') %>"
+                                        >
+                                            <i class="icon-bin"></i> <%= t('.delete') %>
+                                        </a>
+                                    <% end %>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div class="pagination-area">
+    <div class="page_entries_info">
+        <!-- Showing 1 to 10 of 19 entries -->
+        <%= page_entries_info @roles %>
+    </div>
+
+    <div class="pagination_style paging_simple_numbers">
+        <%= will_paginate @roles, previous_label: 'Prev'.html_safe, next_label: 'Next'.html_safe, renderer: BootstrapPagination::Rails, class: 'align-self-center' %>
+    </div>
+</div>

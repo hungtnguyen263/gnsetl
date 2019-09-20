@@ -1,0 +1,377 @@
+<fieldset>
+    <a class="collapsed text-default" data-toggle="collapse" href="#collapsible-control-group">
+        <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700"><%= t('.policy_settings') %></span> (<%= t('.more_here') %>)</legend>
+    </a>
+    <div id="collapsible-control-group" class="collapse">
+        <ul class="nav nav-tabs nav-tabs-top border-bottom-0">
+            <li class="nav-item"><a href="#bottom-Dashboard" class="nav-link active" data-toggle="tab"><%= t('.dashboard') %></a></li>
+            <li class="nav-item"><a href="#bottom-Contact" class="nav-link" data-toggle="tab"><%= t('.contact') %></a></li>
+            <li class="nav-item"><a href="#bottom-Project" class="nav-link" data-toggle="tab"><%= t('.project') %></a></li>
+            <li class="nav-item"><a href="#bottom-User" class="nav-link" data-toggle="tab"><%= t('.userr') %></a></li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= t('.more') %></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="#bottom-Report" class="dropdown-item" data-toggle="tab"><%= t('.report') %></a>
+                    <a href="#bottom-System" class="dropdown-item" data-toggle="tab"><%= t('.system') %></a>
+                </div>
+            </li>
+        </ul>
+        
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="bottom-Dashboard">
+                <div class="form-group">
+                    Coming Soon...
+                </div>
+            </div>
+        
+            <div class="tab-pane fade" id="bottom-Contact">
+                <label class="d-block font-weight-semibold text-blue-800"><%= t('.contact') %></label>
+                
+                <table class="table table-bordered">
+                    <tr>
+                        <th><%= t('.privileges') %></th>
+                        <th><%= t('.owner') %></th>
+                        <th><%= t('.other') %></th>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="form-group">
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="hidden"
+                                        name="permissions[gns_contact.contact.list]"
+                                        value="false"
+                                    >
+                                    <input type="checkbox" class="custom-control-input" id="contact-list"
+                                        name="permissions[gns_contact.contact.list]"
+                                        value="true"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contact.list') %>
+                                    >
+                                    <label class="custom-control-label position-static" for="contact-list"><%= t('.list') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-create">
+                                    <label class="custom-control-label position-static" for="project-create"><%= t('.create') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-update">
+                                    <label class="custom-control-label position-static" for="project-update"><%= t('.update') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-delete">
+                                    <label class="custom-control-label position-static" for="project-delete"><%= t('.delete') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-view">
+                                    <label class="custom-control-label position-static" for="project-view"><%= t('.view_details') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-logs">
+                                    <label class="custom-control-label position-static" for="project-logs"><%= t('.logs') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-activate">
+                                    <label class="custom-control-label position-static" for="project-activate"><%= t('.activate') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-deactivate">
+                                    <label class="custom-control-label position-static" for="project-deactivate"><%= t('.de_activate') %></label>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="hidden"
+                                        name="permissions[gns_contact.contact.list]"
+                                        value="false"
+                                    >
+                                    <input type="checkbox" class="custom-control-input" id="contact-list"
+                                        name="permissions[gns_contact.contact.list]"
+                                        value="true"
+                                        <%= 'checked' if @role.has_permission?('gns_contact.contact.list') %>
+                                    >
+                                    <label class="custom-control-label position-static" for="contact-list"><%= t('.list') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-create">
+                                    <label class="custom-control-label position-static" for="project-create"><%= t('.create') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-update">
+                                    <label class="custom-control-label position-static" for="project-update"><%= t('.update') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-delete">
+                                    <label class="custom-control-label position-static" for="project-delete"><%= t('.delete') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-view">
+                                    <label class="custom-control-label position-static" for="project-view"><%= t('.view_details') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-logs">
+                                    <label class="custom-control-label position-static" for="project-logs"><%= t('.los') %>Logs</label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-activate">
+                                    <label class="custom-control-label position-static" for="project-activate"><%= t('.activate') %></label>
+                                </div>
+                    
+                                <div class="custom-control custom-control-right custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="project-deactivate">
+                                    <label class="custom-control-label position-static" for="project-deactivate"><%= t('.de_activate') %></label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                
+                
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold text-blue-800"><%= t('.groups') %></label>
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-list" checked>
+                        <label class="custom-control-label position-static" for="project-list"><%= t('.list') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-create">
+                        <label class="custom-control-label position-static" for="project-create"><%= t('.create') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-update">
+                        <label class="custom-control-label position-static" for="project-update"><%= t('.update') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-delete">
+                        <label class="custom-control-label position-static" for="project-delete"><%= t('.delete') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-view">
+                        <label class="custom-control-label position-static" for="project-view"><%= t('.view_details') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-logs">
+                        <label class="custom-control-label position-static" for="project-logs"><%= t('.logs') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-activate">
+                        <label class="custom-control-label position-static" for="project-activate"><%= t('.activate') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-deactivate">
+                        <label class="custom-control-label position-static" for="project-deactivate"><%= t('.de_activate') %></label>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="tab-pane fade" id="bottom-Project">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold text-blue-800"><%= t('.projects') %></label>
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-list" checked>
+                        <label class="custom-control-label position-static" for="project-list"><%= t('.list') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-create">
+                        <label class="custom-control-label position-static" for="project-create"><%= t('.create') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-update">
+                        <label class="custom-control-label position-static" for="project-update"><%= t('.update') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-delete">
+                        <label class="custom-control-label position-static" for="project-delete"><%= t('.delete') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-view">
+                        <label class="custom-control-label position-static" for="project-view"><%= t('.view_details') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-logs">
+                        <label class="custom-control-label position-static" for="project-logs"><%= t('.logs') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-activate">
+                        <label class="custom-control-label position-static" for="project-activate"><%= t('.activate') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-deactivate">
+                        <label class="custom-control-label position-static" for="project-deactivate"><%= t('.de_activate') %></label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold text-blue-800"><%= t('.types') %></label>
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-list" checked>
+                        <label class="custom-control-label position-static" for="project-list"><%= t('.list') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-create">
+                        <label class="custom-control-label position-static" for="project-create"><%= t('.create') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-update">
+                        <label class="custom-control-label position-static" for="project-update"><%= t('.update') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-delete">
+                        <label class="custom-control-label position-static" for="project-delete"><%= t('.delete') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-view">
+                        <label class="custom-control-label position-static" for="project-view"><%= t('.view_details') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-logs">
+                        <label class="custom-control-label position-static" for="project-logs"><%= t('.logs') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-activate">
+                        <label class="custom-control-label position-static" for="project-activate"><%= t('.activate') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-deactivate">
+                        <label class="custom-control-label position-static" for="project-deactivate"><%= t('.de_activate') %></label>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="tab-pane fade" id="bottom-User">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold text-blue-800"><%= t('.users') %></label>
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-list" checked>
+                        <label class="custom-control-label position-static" for="project-list"><%= t('.list') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-create">
+                        <label class="custom-control-label position-static" for="project-create"><%= t('.create') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-update">
+                        <label class="custom-control-label position-static" for="project-update"><%= t('.update') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-delete">
+                        <label class="custom-control-label position-static" for="project-delete"><%= t('.delete') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-view">
+                        <label class="custom-control-label position-static" for="project-view"><%= t('.view_details') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-logs">
+                        <label class="custom-control-label position-static" for="project-logs"><%= t('.logs') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-activate">
+                        <label class="custom-control-label position-static" for="project-activate"><%= t('.activate') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-deactivate">
+                        <label class="custom-control-label position-static" for="project-deactivate"><%= t('.de_activate') %></label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold text-blue-800"><%= t('.roles') %></label>
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-list" checked>
+                        <label class="custom-control-label position-static" for="project-list"><%= t('.list') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-create">
+                        <label class="custom-control-label position-static" for="project-create"><%= t('.create') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-update">
+                        <label class="custom-control-label position-static" for="project-update"><%= t('.update') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-delete">
+                        <label class="custom-control-label position-static" for="project-delete"><%= t('.delete') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-view">
+                        <label class="custom-control-label position-static" for="project-view"><%= t('.view_details') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-logs">
+                        <label class="custom-control-label position-static" for="project-logs"><%= t('.logs') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-activate">
+                        <label class="custom-control-label position-static" for="project-activate"><%= t('.activate') %></label>
+                    </div>
+        
+                    <div class="custom-control custom-control-right custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="project-deactivate">
+                        <label class="custom-control-label position-static" for="project-deactivate"><%= t('.de_activate') %></label>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="tab-pane fade" id="bottom-Report">
+                <div class="form-group">
+                    Coming Soon...
+                </div>
+            </div>
+        
+            <div class="tab-pane fade" id="bottom-System">
+                <div class="form-group">
+                    Coming Soon...
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

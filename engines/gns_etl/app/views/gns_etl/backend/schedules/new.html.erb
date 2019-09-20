@@ -1,0 +1,46 @@
+<% content_for :title do %>
+    <%= t('.new_schedule') %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i><%= t('home') %> </a>
+    <a href="<%= gns_etl.backend_schedules_path %>" class="breadcrumb-item"></a><%= t('.schedules') %></a>
+    <span class="breadcrumb-item active"><%= t('.create') %></span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"></a><%= t('.schedule') %></span> - <%= t('.create') %></h4>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.new_schedule').submit(function(e) {
+                e.preventDefault();
+                
+                var form = $(this);
+                
+                // clear modal
+                schedule_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    if (typeof(newScheduleCallback) !== 'undefined') {
+                        newScheduleCallback(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-body">
+        <%= render 'form', schedule: @schedule %>
+    </div>
+</div>

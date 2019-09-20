@@ -1,0 +1,116 @@
+<% content_for :title do %>
+    <%= t('.my_account') %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('.home') %></a>
+    <span class="breadcrumb-item active"><%= t('.my_account') %></span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-users mr-2"></i> <span class="font-weight-semibold"><%= t('.my_account') %></span></h4>
+<% end %>
+
+<!-- Inner container -->
+<div class="d-flex align-items-start flex-column flex-md-row">
+
+    <!-- Left content -->
+    <div class="tab-content w-100 overflow-auto order-2 order-md-1">
+        
+        <!-- Account settings -->
+        <div class="card">
+            <div class="card-header bg-transparent header-elements-inline">
+                <h5 class="card-title"><%= t('.account_settings') %></h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <%= form_for '', url: gns_core.update_account_backend_accounts_path, html: {multipart: true} do |f| %>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email <span class="text-danger">*</span></label>
+                                <input type="text" value="<%= current_user.email %>" readonly="readonly" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="d-block font-weight-semibold"><%= t('.avatar') %></label>
+                                <input name="account[avatar]" type="file" class="file-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary"><%= t('.update_info') %></button>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <!-- /account settings -->
+        
+        <!-- Account settings -->
+        <div class="card">
+            <div class="card-header bg-transparent header-elements-inline">
+                <h5 class="card-title"><%= t('.change_password') %></h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <%= form_for '', url: gns_core.update_password_backend_accounts_path do |f| %>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label><%= t('.current_password') %> <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control"
+                                    name="account[current_password]"
+                                    placeholder="<%= t('.enter_current_password') %>"
+                                >
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label><%= t('.new_password') %> <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control"
+                                    name="account[password]"
+                                    placeholder="<%= t('.enter_new_password') %>"
+                                >
+                            </div>
+
+                            <div class="col-md-4">
+                                <label><%= t('.repeat_password') %> <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control"
+                                    name="account[password_confirmation]"
+                                    placeholder="<%= t('.repeat_new_password') %>"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary"><%= t('.save_changes') %></button>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <!-- /account settings -->
+        
+    </div>
+    <!-- /left content -->
+
+
+    <!-- Right sidebar component -->
+    <div class="sidebar sidebar-light bg-transparent sidebar-component sidebar-component-right wmin-300 border-0 shadow-0 order-1 order-md-2 sidebar-expand-md">
+
+        <%= render "sidebar", title: 'Profile information' %>
+
+    </div>
+    <!-- /right sidebar component -->
+
+</div>
+<!-- /inner container -->

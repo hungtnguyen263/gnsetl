@@ -1,0 +1,79 @@
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-info-700">
+            <th class="text-nowrap">Full Name</th>
+            <th class="text-nowrap">Email</th>
+            <th class="text-nowrap">Roles</th>
+            <th class="text-nowrap">Status</th>
+            <th class="text-nowrap">Created At</th>
+            <th class="text-nowrap text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each do |user| %>
+            <tr>
+                <td>
+                    <%= user.name %>
+                </td>
+                <td><%= user.email %></td>
+                <td>
+                    <% if user.roles.empty? %>
+                        <span class="badge badge-flat border-grey-800 text-default">No Access</span>
+                    <% else %>
+                        <% values = user.roles.map {|r| {text: r.name, value: r.id}} %>
+                        <% values.each do |value| %>
+                            <span class="badge badge-flat border-primary text-primary-600"><%= value[:text] %></span>
+                        <% end %>
+                    <% end %>
+                </td>
+                <td>
+                    <span class="badge badge-active">Active</span>
+                </td>
+                <td>
+                    <%= user.created_at.strftime("%d/%m/%Y") %>
+                </td>
+                <td class="text-right">
+                    <div class="list-icons">
+                        <% if (can? :update, user) or (can? :delete, user) %>
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+                                
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <% if can? :update, user %>
+                                        <a class="dropdown-item edit-user-button"
+                                            href="<%= gns_core.edit_backend_user_path(user) %>">
+                                            <i class="icon-pencil7"></i> Update
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :delete, user %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_core.backend_user_path(user) %>"
+                                            data-method="DELETE"
+                                            data-confirm="You are about to delete a employee"
+                                        >
+                                            <i class="icon-bin"></i> Delete
+                                        </a>
+                                    <% end %>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div class="pagination-area">
+    <div class="page_entries_info">
+        <!-- Showing 1 to 10 of 19 entries -->
+        <%= page_entries_info @users %>
+    </div>
+
+    <div class="pagination_style paging_simple_numbers">
+        <%= will_paginate @users, previous_label: 'Prev'.html_safe, next_label: 'Next'.html_safe, renderer: BootstrapPagination::Rails, class: 'align-self-center' %>
+    </div>
+</div>

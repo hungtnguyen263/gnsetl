@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>SAO-EE | ERP SYSTEM</title>
+	
+	<!--Favicons-->
+	<link rel="shortcut icon" href="/gns_ux/assets/backend/images/fav/favicon.ico">
+
+	<!-- Global stylesheets -->
+	<%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" %>
+    <%= stylesheet_link_tag "/gns_ux/assets/backend/global/css/icons/icomoon/styles.css" %>
+    <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/bootstrap.min.css" %>
+    <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/bootstrap_limitless.min.css" %>
+    <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/layout.min.css" %>
+    <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/components.min.css" %>
+    <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/colors.min.css" %>
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/main/jquery.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/main/bootstrap.bundle.min.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/loaders/blockui.min.js' %>
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<%= javascript_include_tag '/gns_ux/assets/backend/layout1/js/app.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/forms/styling/uniform.min.js' %>
+	<script>
+		$(document).ready(function() {
+			$(this).find('.radio-button').uniform();
+		});
+	</script>
+	<!-- /theme JS files -->
+
+</head>
+
+<body>
+
+	<!-- Page content -->
+	<div class="page-content">
+
+		<!-- Main content -->
+		<div class="content-wrapper">
+
+			<!-- Content area -->
+			<div class="content d-flex justify-content-center align-items-center">
+				<div class="card mb-0">
+					<div class="card-body">
+						<div class="text-center mb-3">
+							<!--<img src="/gns_ux/assets/backend/images/logo.png" class="mb-3 mt-1" height="80" alt="">-->
+							<h5 class="mb-0"><%= t('.login_to_your_account') %></h5>
+						</div>
+						
+						<%= yield %>
+						
+						<span class="form-text text-center text-muted">
+							Copyright © 2019 SAO-EE. All rights reserved.<br>
+							Powered & designed by <a href="http://hoangkhang.com.vn" target="_blank">Hoang Khang Incotech</a>
+						</span>
+					</div>
+				</div>
+			</div>
+			<!-- /content area -->
+
+		</div>
+		<!-- /main content -->
+
+	</div>
+	<!-- /page content -->
+
+</body>
+</html>

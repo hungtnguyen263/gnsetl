@@ -1,0 +1,1754 @@
+<div class="tab-pane fade" id="tabProject">
+    <div class="card-group-control card-group-control-left" id="accordion-control">
+
+        <div class="pt-2 pb-2 permissions-box">
+            <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                <h6 class="card-title mb-1">
+                    <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                       href="#gnsProject-projects"><%= t('.projects') %>
+                    </a>
+                </h6>
+                <div>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
+                    <i class="icon-primitive-dot text-muted font-size-sm"></i>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all') %></button>
+                </div>
+            </div>
+            
+            <div id="gnsProject-projects" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.create]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.create]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.create"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.create') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.create"><%= t('.create_upp') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.create') %></b> <%= t('.a_project') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.create.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.create.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.create.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.read_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.read_own"><%= t('.read_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.their_own_projects') %></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.read_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.read_other"><%= t('.read_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.other_people_projects') %></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.projects.update_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.update_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.update_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.update_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.update_own"><%= t('.update_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update_info') %></b> <%= t('.their_own_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.update_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.update_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.update_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.projects.update_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.update_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.update_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.update_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.update_other"><%= t('.update_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update_info') %></b> <%= t('.other_people_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.update_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.update_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.update_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.delete_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.delete_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.delete_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.delete_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.delete_own"><%= t('.delete_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.their_own_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.delete_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.delete_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.delete_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.delete_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.delete_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.delete_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.delete_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.delete_other"><%= t('.delete_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.other_people_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.delete_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.delete_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.delete_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.projects.activate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.activate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.activate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.activate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.activate_own"><%= t('.activate_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate_cancel') %></b> <%= t('.their_own_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.activate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.activate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.activate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.activate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.activate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.activate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.activate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.activate_other"><%= t('.activate_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate_cancel') %></b> <%= t('.other_people_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.activate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.activate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.activate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.deactivate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.deactivate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.deactivate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.deactivate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.deactivate_own"><%= t('.de_activate_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate_re_activate') %></b> <%= t('.their_own_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.deactivate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.deactivate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.deactivate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.deactivate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.deactivate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.deactivate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.deactivate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.deactivate_other"><%= t('.de_activate_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate_re_activate') %></b> <%= t('.other_people_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.deactivate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.deactivate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.deactivate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.setpending_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.setpending_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.setpending_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.setpending_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.setpending_own"><%= t('.request_approval_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.submit_requests') %></b> for <%= t('.their_own_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.request_approval_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.request_approval_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.request_approval_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.setpending_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.setpending_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.setpending_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.setpending_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.setpending_other"><%= t('.request_approval_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.submit_requests') %></b> for <%= t('.other_people_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.request_approval_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.request_approval_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.request_approval_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.setinprogress_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.setinprogress_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.setinprogress_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.setinprogress_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.setinprogress_own"><%= t('.approve_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.approve_confirm_verify') %></b> <%= t('.their_own_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.setinprogress_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.setinprogress_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.setinprogress_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.setinprogress_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.setinprogress_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.setinprogress_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.setinprogress_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.setinprogress_other"><%= t('.approve_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.approve_confirm_verify') %></b> <%= t('.other_people_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.setinprogress_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.setinprogress_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.setinprogress_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.setfinished_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.setfinished_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.setfinished_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.setfinished_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.setfinished_own"><%= t('.finish_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.mark_as_finished') %></b> <%= t('.their_own_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.setfinished_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.setfinished_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.setfinished_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.setfinished_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.setfinished_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.setfinished_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.setfinished_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.setfinished_other"><%= t('.finish_other') %>Finish other</label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.mark_as_finished') %></b> <%= t('.other_people_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.setfinished_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.setfinished_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.setfinished_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.authorize_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.authorize_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.authorize_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.authorize_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.authorize_own"><%= t('.manpower_authorize_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.setup_human_resources_authorized') %></b> <%= t('.their_own_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.authorize_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.authorize_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.authorize_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.projects.authorize_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.projects.authorize_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.projects.authorize_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.projects.authorize_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.projects.authorize_other"><%= t('.manpower_authorize_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.setup_human_resources_authorized') %></b> <%= t('.other_people_projects') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.projects.authorize_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.projects.authorize_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.projects.authorize_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="pt-2 pb-2 permissions-box">
+            <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                <h6 class="card-title mb-1">
+                    <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                       href="#gnsProject-categories"><%= t('.types') %>
+                    </a>
+                </h6>
+                <div>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
+                    <i class="icon-primitive-dot text-muted font-size-sm"></i>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all') %></button>
+                </div>
+            </div>
+
+            <div id="gnsProject-categories" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.categories.create]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.categories.create]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.categories.create"
+                                        <%= 'checked' if @role.has_permission?('gns_project.categories.create') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.categories.create"><%= t('.create_upp') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.create') %></b> <%= t('.a_new_project_type') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.categories.create.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.categories.create.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.categories.create.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.categories.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.categories.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.categories.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.categories.read_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.categories.read_own"><%= t('.read_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.their_own_project_types') %></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.categories.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.categories.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.categories.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.categories.read_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.categories.read_other"><%= t('.read_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.other_people_project_types') %></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.categories.update_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.categories.update_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.categories.update_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.categories.update_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.categories.update_own"><%= t('.update_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update_info') %></b> <%= t('.their_own_project_types') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.categories.update_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.categories.update_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.categories.update_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.categories.update_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.categories.update_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.categories.update_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.categories.update_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.categories.update_other"><%= t('.update_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update_info') %></b> <%= t('.other_people_project_types') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.categories.update_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.categories.update_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.categories.update_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.categories.delete_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.categories.delete_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.categories.delete_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.categories.delete_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.categories.delete_own"><%= t('.delete_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.their_own_project_types') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.categories.delete_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.categories.delete_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.categories.delete_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.categories.delete_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.categories.delete_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.categories.delete_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.categories.delete_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.categories.delete_other"><%= t('.delete_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.other_people_project_types') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.categories.delete_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.categories.delete_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.categories.delete_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.categories.activate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.categories.activate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.categories.activate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.categories.activate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.categories.activate_own"><%= t('.activate_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.their_own_project_types') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.categories.activate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.categories.activate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.categories.activate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.categories.activate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.categories.activate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.categories.activate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.categories.activate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.categories.activate_other"><%= t('.activate_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.other_people_project_types') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.categories.activate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.categories.activate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.categories.activate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.categories.deactivate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.categories.deactivate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.categories.deactivate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.categories.deactivate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.categories.deactivate_own"><%= t('.de_activate_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.their_own_project_types') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.categories.deactivate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.categories.deactivate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.categories.deactivate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.categories.deactivate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.categories.deactivate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.categories.deactivate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.categories.deactivate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.categories.deactivate_other"><%= t('.de_activate_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.other_people_project_types') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.categories.deactivate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.categories.deactivate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.categories.deactivate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+                    
+        <div class="pt-2 pb-2 permissions-box">
+            <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                <h6 class="card-title mb-1">
+                    <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                       href="#gnsProject-stages"><%= t('.stages') %>
+                    </a>
+                </h6>
+                <div>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
+                    <i class="icon-primitive-dot text-muted font-size-sm"></i>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all') %></button>
+                </div>
+            </div>
+
+            <div id="gnsProject-stages" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.stages.create]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.stages.create]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.stages.create"
+                                        <%= 'checked' if @role.has_permission?('gns_project.stages.create') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.stages.create"><%= t('.create_upp') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.create') %></b> <%= t('.a_new_stage') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.stages.create.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.stages.create.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.stages.create.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.stages.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.stages.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.stages.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.stages.read_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.stages.read_own"><%= t('.read_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.their_own_stages') %></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.stages.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.stages.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.stages.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.stages.read_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.stages.read_other"><%= t('.read_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.other_people_stages') %></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.stages.update_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.stages.update_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.stages.update_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.stages.update_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.stages.update_own"><%= t('.update_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update') %></b> <%= t('.their_own_stages') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.stages.update_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.stages.update_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.stages.update_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.stages.update_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.stages.update_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.stages.update_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.stages.update_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.stages.update_other"><%= t('.update_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update') %></b> <%= t('.other_people_stages') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.stages.update_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.stages.update_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.stages.update_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.stages.delete_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.stages.delete_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.stages.delete_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.stages.delete_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.stages.delete_own"><%= t('.delete_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.their_own_stages') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.stages.delete_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.stages.delete_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.stages.delete_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.stages.delete_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.stages.delete_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.stages.delete_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.stages.delete_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.stages.delete_other"><%= t('.delete_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.other_people_stages') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.stages.delete_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.stages.delete_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.stages.delete_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.stages.activate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.stages.activate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.stages.activate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.stages.activate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.stages.activate_own"><%= t('.activate_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.their_own_stages') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.stages.activate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.stages.activate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.stages.activate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.stages.activate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.stages.activate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.stages.activate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.stages.activate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.stages.activate_other"><%= t('.activate_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.other_people_stages') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.stages.activate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.stages.activate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.stages.activate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.stages.deactivate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.stages.deactivate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.stages.deactivate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.stages.deactivate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.stages.deactivate_own"><%= t('.de_activate_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.their_own_stages') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.stages.deactivate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.stages.deactivate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.stages.deactivate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.stages.deactivate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.stages.deactivate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.stages.deactivate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.stages.deactivate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.stages.deactivate_other"><%= t('.de_activate_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.other_people_stages') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.stages.deactivate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.stages.deactivate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.stages.deactivate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="pt-2 pb-2 permissions-box">
+            <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                <h6 class="card-title mb-1">
+                    <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                       href="#gnsProject-templates">Templates
+                    </a>
+                </h6>
+                <div>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on">Select all</button>
+                    <i class="icon-primitive-dot text-muted font-size-sm"></i>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off">Deselect all</button>
+                </div>
+            </div>
+            
+            <div id="gnsProject-templates" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.create]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.create]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.create"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.create') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.create">Create</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>create</b> a template</td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.templates.create.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.templates.create.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.templates.create.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.read_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.read_own">Read own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view/read</b> their own templates</td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.read_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.read_other">Read other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view/read</b> other people's templates</td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.templates.update_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.update_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.update_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.update_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.update_own">Update own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update info</b> their own templates</td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.templates.update_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.templates.update_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.templates.update_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.templates.update_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.update_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.update_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.update_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.update_other">Update other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update info</b> other people's templates</td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.templates.update_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.templates.update_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.templates.update_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.delete_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.delete_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.delete_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.delete_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.delete_own">Delete own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>delete</b> their own templates</td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.templates.delete_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.templates.delete_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.templates.delete_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.delete_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.delete_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.delete_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.delete_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.delete_other">Delete other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>delete</b> other people's templates</td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.templates.delete_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.templates.delete_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.templates.delete_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.templates.activate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.activate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.activate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.activate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.activate_own">Activate own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>activate/cancel</b> their own templates</td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.templates.activate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.templates.activate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.templates.activate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.activate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.activate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.activate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.activate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.activate_other">Activate other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>activate/cancel</b> other people's templates</td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.templates.activate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.templates.activate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.templates.activate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.deactivate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.deactivate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.deactivate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.deactivate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.deactivate_own">De-activate own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>de-activate/re-activate</b> their own templates</td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.templates.deactivate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.templates.deactivate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.templates.deactivate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.deactivate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.deactivate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.deactivate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.deactivate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.deactivate_other">De-activate other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>de-activate/re-activate</b> other people's templates</td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.templates.deactivate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.templates.deactivate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.templates.deactivate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="pt-2 pb-2 permissions-box">
+            <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                <h6 class="card-title mb-1">
+                    <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                       href="#gnsProject-roles"><%= t('.roles_default') %>
+                    </a>
+                </h6>
+                <div>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
+                    <i class="icon-primitive-dot text-muted font-size-sm"></i>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all') %></button>
+                </div>
+            </div>
+            
+            <div id="gnsProject-roles" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.roles.create]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.create]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.create"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.create') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.create"><%= t('.create_upp') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.create') %></b> <%= t('.a_new_project_role') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.roles.create.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.roles.create.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.roles.create.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.roles.set_permissions_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.set_permissions_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.set_permissions_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.set_permissions_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.set_permissions_own"><%= t('.configure_permissions_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.configure_permissions') %></b> <%= t('.their_own_project_roles') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.roles.set_permissions_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.roles.set_permissions_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.roles.set_permissions_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.roles.set_permissions_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.set_permissions_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.set_permissions_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.set_permissions_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.set_permissions_other"><%= t('.configure_permissions_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.configure_permissions') %></b> <%= t('.other_people_project_roles') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.roles.set_permissions_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.roles.set_permissions_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.roles.set_permissions_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.roles.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.read_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.read_own"><%= t('.read_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.their_own_project_roles') %></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.roles.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.read_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.read_other"><%= t('.read_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.other_people_project_roles') %></td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.roles.update_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.update_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.update_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.update_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.update_own"><%= t('.update_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update_info') %></b> <%= t('.their_own_project_roles') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.roles.update_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.roles.update_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.roles.update_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.roles.update_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.update_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.update_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.update_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.update_other"><%= t('.update_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update_info') %></b> <%= t('.other_people_project_roles') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.roles.update_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.roles.update_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.roles.update_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.roles.delete_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.delete_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.delete_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.delete_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.delete_own"><%= t('.delete_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.their_own_project_roles') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.roles.delete_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.roles.delete_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.roles.delete_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.roles.delete_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.delete_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.delete_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.delete_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.delete_other"><%= t('.delete_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.other_people_project_roles') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.roles.delete_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.roles.delete_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.roles.delete_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.roles.activate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.activate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.activate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.activate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.activate_own"><%= t('.activate_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.their_own_project_roles') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.roles.activate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.roles.activate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.roles.activate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.roles.activate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.activate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.activate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.activate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.activate_other"><%= t('.activate_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.other_people_project_roles') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.roles.activate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.roles.activate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.roles.activate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.roles.deactivate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.deactivate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.deactivate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.deactivate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.deactivate_own"><%= t('.de_activate_own') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.their_own_project_roles') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.roles.deactivate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.roles.deactivate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.roles.deactivate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.roles.deactivate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.roles.deactivate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.roles.deactivate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.roles.deactivate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.roles.deactivate_other"><%= t('.de_activate_other') %></label>
+                                </div>
+                            </td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.other_people_project_roles') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_project.roles.deactivate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_project.roles.deactivate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_project.roles.deactivate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

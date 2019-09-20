@@ -1,0 +1,278 @@
+.sidebar:not(.sidebar-component) .sidebar-content {
+    overflow-y: auto;
+}
+.pagination-area {
+    border-top: 1px solid #b7b7b7;
+    padding: 1.25rem 1.25rem 0 1.25rem;
+}
+.pagination-area::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+.pagination-area>div:first-child {
+    margin-left: 0;
+}
+.page_entries_info {
+    float: left;
+    padding: .4375rem 0;
+    margin-bottom: 1.25rem;
+}
+.pagination_style {
+    float: right;
+    text-align: right;
+    margin: 0 0 1.25rem 1.25rem;
+}
+.pagination-area .pagination li:first-child > a, .pagination-area .pagination li:first-child > span {
+    margin-left: 0;
+    border-top-left-radius: .1875rem;
+    border-bottom-left-radius: .1875rem;
+}
+.pagination-area .pagination li:last-child > a, .pagination-area .pagination li:last-child > span {
+    border-top-right-radius: .1875rem;
+    border-bottom-right-radius: .1875rem;
+}
+.pagination-area .pagination li.active > span, .pagination-area .pagination li.active > a {
+    position: relative;
+    display: block;
+    padding: .4375rem .875rem;
+    margin-left: -1px;
+    line-height: 1.5385;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pagination-area .pagination li.active > span {
+    z-index: 1;
+    color: #fff;
+    background-color: #2196f3;
+    border-color: #2196f3;
+}
+.pagination-area .pagination li > a {
+    text-align: center;
+    min-width: 2.25003rem;
+    transition: all ease-in-out .15s;
+}
+.pagination-area .pagination li > a, .pagination-area .pagination li > span {
+    position: relative;
+    display: block;
+    padding: .4375rem .875rem;
+    margin-left: -1px;
+    line-height: 1.5385;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pagination-area .pagination li.disabled a, .pagination-area .pagination li.disabled span {
+    color: #999;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #eee;
+}
+.datalist-content {
+    min-height: 130px;
+    position: relative;
+}
+.datalist-loading-overlay {
+    text-align: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.6);
+    padding-top: 50px;
+}
+.modal-loading-overlay {
+    min-height: 130px;
+    text-align: center;
+    padding-top: 55px;
+}
+.flex {
+    display: flex;
+}
+.flex.space-between {
+    justify-content: space-between;
+}
+.flex.align-center {
+    align-items: center;
+}
+.datalist-header .keyword-search {
+    position: relative;
+}
+.datalist-header .keyword-search input {
+    padding-right: 2rem;
+}
+.datalist-header .keyword-search:after {
+    content: "\e98e";
+    font-family: icomoon;
+    position: absolute;
+    top: 50%;
+    right: .875rem;
+    margin-top: -.375rem;
+    line-height: 1;
+    opacity: .5;
+}
+.navbar-brand img {
+    height: 2.0rem;
+}
+.navbar-brand {
+    padding: 0.5rem 0;
+    margin-right: 0;
+}
+.bg-new {
+    background-color: #2196f3;
+}
+.bg-pending {
+    background-color: #ff7043;
+}
+.bg-in_progress {
+    background-color: #4caf50;
+}
+.bg-finished {
+    background-color: #00bcd4;
+}
+.border-new {
+    border-color: #2196f3;
+}
+.border-pending {
+    border-color: #ff7043;
+}
+.border-in_progress {
+    border-color: #4caf50;
+}
+.border-finished {
+    border-color: #00bcd4;
+}
+.badge-new {
+    color: #fff;
+    background-color: #2196f3;
+}
+.badge-pending {
+    color: #fff;
+    background-color: #ff7043;
+}
+.badge-in_progress {
+    color: #fff;
+    background-color: #4caf50;
+}
+.badge-finished {
+    color: #fff;
+    background-color: #00bcd4;
+}
+.badge-active {
+    color: #fff;
+    background-color: #4caf50;
+}
+.badge-inactive {
+    color: #fff;
+    background-color: #e53935;
+}
+.badge-open {
+    color: #1e88e5;
+    border-color: #2196f3;
+}
+.badge-closed {
+    color: #666;
+    border-color: #777;
+}
+.progress {
+    background-color: #999;
+}
+.progress .progress-bar span {
+    position: absolute;
+    min-width: 100%;
+}
+.border-bottom-dotted {
+    border-bottom: 1px dotted #eee;
+}
+
+.comments-list .comment-area .media {
+    margin-top: .5rem;
+}
+
+.comments-list .comment-area .media-body .main, .comments-list .comment-area .media-body .sub {
+    background-color: #f5f5f5;
+    border-color: #f5f5f5;
+    position: relative;
+    padding: .625rem 1rem;
+    width: auto;
+    color: #333;
+    border-radius: .9rem;
+    margin-bottom: .2rem;
+}
+
+.comments-list .comment-area .media-body .main:before, .comments-list .comment-area .media-body .sub:before {
+    content: '';
+    left: -8px;
+    top: .93752rem;
+    position: absolute;
+    margin-left: 0;
+    border-top: 5px solid transparent;
+    border-right: 8px solid;
+    border-right-color: inherit;
+    border-bottom: 5px solid transparent;
+}
+
+.comments-list .comment-area .media-body .main p, .comments-list .comment-area .media-body .sub p {
+    margin-bottom: 0;
+}
+
+.comments-list .comment-area .comment-action-link {
+    margin-left: 15px;
+    min-height: 15px;
+}
+
+.comments-list .comment-area .comment-reply {
+    padding-left: 15px;
+}
+
+.comments-list .comment-area img.avatar {
+    border: 1px solid #2196f3;
+}
+
+.card-gtitle {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-title {
+    padding: 1.4rem 0;
+}
+.card-group-control .card-title>a.collapsed:before {
+    content: '\edc5';
+}
+.card-group-control .card-title>a:before {
+    content: '\edc6';
+    margin-top: -.8rem;
+    font-size: 1.4rem;
+}
+.inline-ellipse-list-item-50 {
+    max-width: 50%;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.sort-by-box .select2.select2-container {
+    min-width: 8.25rem;
+}
+.btn.warning-button, a.warning-button {
+    opacity: .4;
+    cursor: not-allowed !important;
+}
+.line-through {
+    text-decoration: line-through;
+    color: #999;
+}
+.daterangepicker .table-condensed thead tr:last-child th {
+    padding-top: 0;
+}
+.daterangepicker .table-condensed tr>td, .daterangepicker .table-condensed tr>th {
+    padding: 0;
+    min-width: inherit;
+}
+.daterangepicker th {
+    color: inherit;
+    font-weight: bold;
+}

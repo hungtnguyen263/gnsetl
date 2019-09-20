@@ -1,0 +1,161 @@
+<% content_for :title do %>
+    <%= t('.personal_note') %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i><%= t('home') %></a>
+    <span class="breadcrumb-item active"><%= t('.personal_notes') %></span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-notebook mr-2"></i> <span class="font-weight-semibold"><%= t('.personal_note') %></span></h4>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <a href="<%= gns_note.new_backend_personal_note_path %>"
+        class="btn btn-primary add-note-button"
+    >
+        <b><i class="icon-plus22"></i></b><%= t('.add_note') %> 
+    </a>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        // global modal
+        var personal_note_modal = new gModal({size: 'md'});
+        var updateNoteCallback;
+        var newNoteCallback;
+        
+        $(function() {            
+            $('.add-note-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                personal_note_modal.load(button.attr('href'));
+                
+                newNoteCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        personal_note_modal.hide();
+                        
+                        datalists[$('.datalist-personal-notes').attr('data-id')].refresh();          
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        personal_note_modal.renderHtml(response);
+                    }
+                };
+            });
+            
+            $(document).on('click', '.edit-note-button', function(e) {
+                e.preventDefault();
+                
+                var but = $(this);
+                
+                // load modal edit category
+                personal_note_modal.load(but.attr('href'));
+                
+                // after update category event
+                updateNoteCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        personal_note_modal.hide();
+                        
+                        datalists[but.closest('.datalist').attr('data-id')].refresh();
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        personal_note_modal.renderHtml(response);
+                    }           
+                }
+                    
+            });
+        });
+    </script>
+<% end %>
+
+<!-- Inner container -->
+<div class="d-flex align-items-start flex-column flex-md-row">
+
+    <!-- Left content -->
+    <div class="tab-content w-100 overflow-auto order-2 order-md-1">
+
+        <!-- Datatable -->
+        <div class="card datalist datalist-personal-notes"
+            data-url="<%= gns_note.list_backend_personal_notes_path %>"
+        >
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title"><%= t('.note_list') %></h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+            
+            <form class="datalist-filters">
+                <div class="card-body pb-0">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select name="is_done" data-placeholder="<%= t('.placeholder_filter_by_status') %>"
+                                    class="form-control selectAllowClear">
+                                    <option value="false"><%= t('.not_done') %></option>
+                                    <option value="true"><%= t('.is_done') %></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-1 text-right">
+                            <span class="btn btn-primary mb-3 datalist-search-button"><%= t('go')%></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <div class="datalist-header flex space-between">
+                        <div class="keyword-search mr-2">
+                            <input class="form-control keyword-input" name="keyword" type="search" placeholder="<%= t('keyword_search') %>">
+                        </div>
+                        <div class="text-right text-nowrap flex">
+                            <div class="sort-by-box flex align-center mr-3">
+                                <span class="mr-1"><%= t('sort_by')%></span>
+                                <select name="sort_by" data-placeholder="Sort by..." class="form-control selectPrimary sort-by-select">
+                                    <option value="created_at"><%= t('.created_at')%></option>
+                                </select>
+                                <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
+                            </div>
+                            <div class="show-per-page flex align-center">
+                                <span class="mr-1"><%= t('per_page')%></span>
+                                <select name="per_page" class="form-control selectPrimary per-page-select">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="datalist-content">
+                    
+                </div>
+            </form>
+        </div>
+        
+    </div>
+    <!-- /left content -->
+
+
+    <!-- Right sidebar component -->
+    <div class="sidebar sidebar-light bg-transparent sidebar-component sidebar-component-right wmin-300 border-0 shadow-0 order-1 order-md-2 sidebar-expand-md">
+
+        <%= render "sidebar", title: 'Profile information' %>
+
+    </div>
+    <!-- /right sidebar component -->
+
+</div>
+<!-- /inner container -->

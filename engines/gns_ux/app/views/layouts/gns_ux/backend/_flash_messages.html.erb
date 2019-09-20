@@ -1,0 +1,9 @@
+<% if !flash.empty? %>
+    <% flash.each do |key, message| %>
+        <script>
+            $(document).ready(function() {
+                showNotification('<%= key %>', '<%= message %>');
+            });
+        </script>
+    <% end %>
+<% end %>
