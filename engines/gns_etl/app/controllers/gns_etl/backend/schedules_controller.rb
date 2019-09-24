@@ -1,7 +1,7 @@
 module GnsEtl
   module Backend
     class SchedulesController < GnsCore::Backend::BackendController
-      before_action :set_schedule, only: [:start, :edit, :update, :destroy]
+      before_action :set_schedule, only: [:start, :edit, :update, :logs]
   
       # GET /schedules
       def list
@@ -11,7 +11,8 @@ module GnsEtl
       end
   
       # GET /schedules/1
-      def show
+      def logs
+        @logs = @schedule.logs
       end
   
       # GET /schedules/new

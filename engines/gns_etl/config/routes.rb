@@ -11,6 +11,7 @@ GnsEtl::Engine.routes.draw do
                     post 'list'
                     put 'start'
                     put 'stop'
+                    get ':id/logs', to: 'schedules#logs', as: 'logs'
                 end
             end
         end

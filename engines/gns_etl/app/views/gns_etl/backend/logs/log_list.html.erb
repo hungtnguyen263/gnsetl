@@ -1,0 +1,34 @@
+<table class="table table-hover">
+    <thead>
+        <tr class="alpha-primary">
+            <th><%= t('.no') %></th>
+            <th><%= t('.document') %></th>
+            <th><%= t('.update_date') %></th>
+            <th><%= t('.change_description') %></th>
+            <th><%= t('.remark') %></th>
+            <th><%= t('.change_by') %></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @logs.each_with_index do |log,index| %>
+            <tr>
+                <td><%= index + 1 %></td>
+                <td><%= log.get_data.name %></td>
+                <td><%= log.created_at.strftime("%d/%m/%Y - %I:%M %p") %></td>
+                <td><%= t(log.phrase, log.get_data.attributes.symbolize_keys) %></td>
+                <td><%= log.remark %></td>
+                <td><%= log.user_name %></td>
+                <td>
+                    <div class="list-icons">                        
+                        <a class="list-icons-item" title="Download attachment"
+                           href="<%= gns_project.log_download_backend_attachments_path(attachment_log_id: log) %>"
+                           target="_blank">
+                            <i class="icon-download"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

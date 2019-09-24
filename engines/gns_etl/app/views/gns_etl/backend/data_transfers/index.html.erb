@@ -244,7 +244,7 @@
 
 <% content_for :page_script do %>
     <script>
-        // global modal cho việc tạo mới stage
+        // global modal
         var schedule_modal = new gModal({size: 'sm'});
         var newScheduleCallback;
         
@@ -266,7 +266,7 @@
                         window.location = response.redirect;
                     } else {
                         // validation error
-                        contact_category_modal.renderHtml(response);
+                        schedule_modal.renderHtml(response);
                     }
                 };
             });

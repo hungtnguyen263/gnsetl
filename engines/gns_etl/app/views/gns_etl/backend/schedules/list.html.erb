@@ -42,7 +42,11 @@
                     <% if schedule.status == GnsEtl::Schedule::STATUS_INPROCESSING %>
                         <a href="#" class="btn btn-sm btn-warning">Stop</a>
                     <% end %>
-                    <a href="#" class="btn btn-sm btn-danger">Cancel</a>
+                    <% if schedule.status != GnsEtl::Schedule::STATUS_NEW %>
+                        <a href="<%= gns_etl.logs_backend_schedules_path(schedule) %>"
+                            class="btn btn-sm btn-info modal-control" modal-size="md">Logs
+                        </a>
+                    <% end %>
                 </td>
             </tr>
         <% end %>
