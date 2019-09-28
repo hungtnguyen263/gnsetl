@@ -34,9 +34,7 @@
                 <td>
                     <% if schedule.status == GnsEtl::Schedule::STATUS_NEW %>
                         <a href="<%= gns_etl.start_backend_schedules_path(id: schedule) %>"
-                            data-method="PUT"
-                            data-confirm="You want to start this schedule"
-                            class="btn btn-sm btn-info ajax datalist-g-link">Start
+                            class="btn btn-sm btn-info start-schedule-button">Start
                         </a>
                     <% end %>
                     <% if schedule.status == GnsEtl::Schedule::STATUS_INPROCESSING %>
@@ -44,7 +42,7 @@
                     <% end %>
                     <% if schedule.status != GnsEtl::Schedule::STATUS_NEW %>
                         <a href="<%= gns_etl.logs_backend_schedules_path(schedule) %>"
-                            class="btn btn-sm btn-info modal-control" modal-size="md">Logs
+                            class="btn btn-sm btn-info" target="_blank">Logs
                         </a>
                     <% end %>
                 </td>

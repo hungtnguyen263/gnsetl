@@ -54,15 +54,24 @@ module GnsEtl
         redirect_to schedules_url, notice: 'Schedule was successfully destroyed.'
       end
       
-      # START /schedules/1
+      # Start running action
       def start
-        @schedule.start
-        GnsEtl::ScheduleJob.set(wait: 1.minutes).perform_later(@schedule, {})
-        
-        render json: {
-          status: 'success',
-          message: 'Schedule was successfully started.',
-        }
+        limit = params[:limit]
+        if request.post?
+          if !limit.present? or !(limit.to_i != 0)
+            @schedule.errors.add('limit', "not be blank (and must be a number)")
+          end
+          
+          if @schedule.errors.empty?
+            # run in background
+            GnsEtl::ScheduleJob.perform_now(@schedule, {limit: limit})
+            
+            render json: {
+              status: 'success',
+              message: 'Schedule was successfully started.',
+            }
+          end
+        end
       end
   
       private

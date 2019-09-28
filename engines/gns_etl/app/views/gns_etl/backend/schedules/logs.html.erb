@@ -6,16 +6,16 @@
     <table class="table table-hover">
         <thead>
             <tr class="alpha-primary">
-                <th>Time</th>
+                <th>Log Time</th>
                 <th>Stage</th>
                 <th>Message</th>
                 <th>Success</th>
             </tr>
         </thead>
         <tbody>
-            <% @logs.each do |log| %>
+            <% @logs.order('logtime desc').each do |log| %>
                 <tr>
-                    <td><%= log.logtime.strftime("%d/%m/%Y - %T, %L") %></td>
+                    <td class="text-nowrap"><%= log.logtime.strftime("%d/%m/%Y - %T, %L") %></td>
                     <td><%= '' %></td>
                     <td><%= log.message %></td>
                     <td><%= log.success? ? 'OK' : 'Failed' %></td>

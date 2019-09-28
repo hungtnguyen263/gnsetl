@@ -1,0 +1,59 @@
+<% content_for :title do %>
+    Start running - <%= @schedule.name %>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.start_running').submit(function(e) {
+                e.preventDefault();                
+                var form = $(this);
+                
+                // clear modal
+                start_schedule_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                      showNotification(response.status, response.message);
+                      start_schedule_modal.hide();
+                      
+                      // load task list
+                      if (typeof(start_schedule_callback) !== 'undefined') {
+                        start_schedule_callback();
+                      }
+                    } else {
+                      start_schedule_modal.renderHtml(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-body">
+        <%= form_for '', url: gns_etl.start_backend_schedules_path(id: @schedule.id), html: {multipart: false, class: 'start_running'} do |f| %>
+            <h5>You want to start this schedule</h5>
+            
+            <div class="form-group">
+                <input class="form-control <%= 'border-danger' if @schedule.errors.full_messages_for(:limit).present? %>"
+                    placeholder="Enter the limit on the number of records to transfer"
+                    name="limit"
+                />
+                <% if @schedule.errors.full_messages_for(:limit).present? %>
+                    <span class="form-text text-danger"><%= @schedule.errors.full_messages_for(:limit).join('<br/>').html_safe %></span>
+                <% end %>
+            </div>
+            
+            <div class="text-left">
+                <button type="submit" class="btn btn-primary"><%= t('.submit') %></button>
+            </div>
+        <% end %>
+    </div>
+</div>

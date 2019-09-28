@@ -248,6 +248,9 @@
         var schedule_modal = new gModal({size: 'sm'});
         var newScheduleCallback;
         
+        var start_schedule_modal = new gModal({size: 'sm'});
+        var start_schedule_callback;
+        
         $(function() {            
             $('.add-schedule-button').click(function(e) {
                 e.preventDefault();
@@ -261,13 +264,23 @@
                         // hide modal
                         schedule_modal.hide();
                         
-                        datalists[$('.datalist-schedules').attr('data-id')].refresh();          
+                        datalists[$('.datalist-schedules').attr('data-id')].refresh();
                     } else if (typeof(response.redirect) !== 'undefined') {
                         window.location = response.redirect;
                     } else {
                         // validation error
                         schedule_modal.renderHtml(response);
                     }
+                };
+            });
+            
+            $(document).on('click', '.start-schedule-button', function(e) {
+                e.preventDefault();
+                
+                start_schedule_modal.load($(this).attr('href'));
+                
+                start_schedule_callback = function() {
+                    datalists[$('.datalist-schedules').attr('data-id')].refresh();
                 };
             });
         });
