@@ -10,6 +10,8 @@ require 'rubyXL/convenience_methods'
 require 'figaro'
 require 'delayed_job_active_record'
 require 'sidekiq'
+require 'tiny_tds'
+require 'activerecord-sqlserver-adapter'
 
 
 module GnsCore

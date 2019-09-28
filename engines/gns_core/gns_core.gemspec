@@ -40,4 +40,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'figaro'
   spec.add_dependency 'delayed_job_active_record'
   spec.add_dependency 'sidekiq'
+  spec.add_dependency 'tiny_tds'
+  spec.add_dependency 'activerecord-sqlserver-adapter'
 end

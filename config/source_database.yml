@@ -1,0 +1,10 @@
+default: &default
+  adapter: sqlserver
+  host: LAPTOP-A1MK1G4S
+  port: 1433
+  username: hungtnguyen
+  password: 123
+
+development:
+  <<: *default
+  database: etl_source_db
