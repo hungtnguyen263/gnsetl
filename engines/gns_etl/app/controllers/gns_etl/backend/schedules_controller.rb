@@ -1,7 +1,10 @@
 module GnsEtl
   module Backend
     class SchedulesController < GnsCore::Backend::BackendController
-      before_action :set_schedule, only: [:start, :edit, :update, :logs]
+      include GnsCore::ApplicationHelper
+      
+      before_action :set_schedule, only: [:edit, :update, :logs,
+                                          :start, :extract, :transfer]
   
       # GET /schedules
       def list
@@ -69,6 +72,46 @@ module GnsEtl
             render json: {
               status: 'success',
               message: 'Schedule was successfully started.',
+            }
+          end
+        end
+      end
+      
+      # extract data action
+      def extract
+        limit = params[:limit]
+        if request.post?
+          if !limit.present? or !is_number?(limit)
+            @schedule.errors.add('limit', "not be blank (and must be a number)")
+          end
+          
+          if @schedule.errors.empty?
+            # run in background
+            GnsEtl::WorkerStartCopy.perform_later(@schedule, {limit: limit}) if @schedule.status == GnsEtl::Schedule::STATUS_NEW
+            
+            render json: {
+              status: 'success',
+              message: 'The schedule is copying data.',
+            }
+          end
+        end
+      end
+      
+      # Copy running action
+      def transfer
+        limit = params[:limit]
+        if request.post?
+          if !limit.present? or !is_number?(limit)
+            @schedule.errors.add('limit', "not be blank (and must be a number)")
+          end
+          
+          if @schedule.errors.empty?
+            # run in background
+            GnsEtl::WorkerStartTransfer.perform_later(@schedule, {limit: limit}) if @schedule.status == GnsEtl::Schedule::STATUS_COPIED
+            
+            render json: {
+              status: 'success',
+              message: 'The schedule is transferring data.',
             }
           end
         end

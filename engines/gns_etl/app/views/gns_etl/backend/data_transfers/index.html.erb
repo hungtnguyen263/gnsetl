@@ -93,130 +93,6 @@
     </div>
 </div>
 
-
-<div class="card">
-    <div class="card-body">
-        <h3 class="panel-inside-title">Mapping Infomation</h3>
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th colspan="3">Source table: Product</th>
-                    <th colspan="3">Target table: product</th>
-                </tr>
-                <tr>
-                    <th>Field</th>
-                    <th>Type</th>
-                    <th>Default value</th>
-                    <th>Field</th>
-                    <th>Type</th>
-                    <th>Default value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>id</td>
-                    <td>int</td>
-                    <td>not null</td>
-                    <td>id</td>
-                    <td>integer</td>
-                    <td>not null</td>
-                </tr>
-                <tr>
-                    <td>pname</td>
-                    <td>nvarchar</td>
-                    <td>not null</td>
-                    <td>name</td>
-                    <td>string</td>
-                    <td>not null</td>
-                </tr>
-                <tr>
-                    <td>price</td>
-                    <td>float</td>
-                    <td>0</td>
-                    <td>price</td>
-                    <td>decimal</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>unit</td>
-                    <td>varchar</td>
-                    <td></td>
-                    <td>unit</td>
-                    <td>string</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>note</td>
-                    <td>nvarchar</td>
-                    <td></td>
-                    <td>description</td>
-                    <td>text</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th colspan="3">Source table: Product</th>
-                    <th colspan="3">Target table: product</th>
-                </tr>
-                <tr>
-                    <th>Field</th>
-                    <th>Type</th>
-                    <th>Default value</th>
-                    <th>Field</th>
-                    <th>Type</th>
-                    <th>Default value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>id</td>
-                    <td>int</td>
-                    <td>not null</td>
-                    <td>id</td>
-                    <td>integer</td>
-                    <td>not null</td>
-                </tr>
-                <tr>
-                    <td>pname</td>
-                    <td>nvarchar</td>
-                    <td>not null</td>
-                    <td>name</td>
-                    <td>string</td>
-                    <td>not null</td>
-                </tr>
-                <tr>
-                    <td>price</td>
-                    <td>float</td>
-                    <td>0</td>
-                    <td>price</td>
-                    <td>decimal</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>unit</td>
-                    <td>varchar</td>
-                    <td></td>
-                    <td>unit</td>
-                    <td>string</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>note</td>
-                    <td>nvarchar</td>
-                    <td></td>
-                    <td>description</td>
-                    <td>text</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
 <div class="card datalist datalist-schedules"
     data-url="<%= gns_etl.list_backend_schedules_path %>"
 >
@@ -251,6 +127,12 @@
         var start_schedule_modal = new gModal({size: 'sm'});
         var start_schedule_callback;
         
+        var extract_modal = new gModal({size: 'sm'});
+        var extract_callback;
+        
+        var transfer_modal = new gModal({size: 'sm'});
+        var transfer_callback;
+        
         $(function() {            
             $('.add-schedule-button').click(function(e) {
                 e.preventDefault();
@@ -280,6 +162,26 @@
                 start_schedule_modal.load($(this).attr('href'));
                 
                 start_schedule_callback = function() {
+                    datalists[$('.datalist-schedules').attr('data-id')].refresh();
+                };
+            });
+            
+            $(document).on('click', '.extract-data-button', function(e) {
+                e.preventDefault();
+                
+                extract_modal.load($(this).attr('href'));
+                
+                extract_callback = function() {
+                    datalists[$('.datalist-schedules').attr('data-id')].refresh();
+                };
+            });
+            
+            $(document).on('click', '.transfer-data-button', function(e) {
+                e.preventDefault();
+                
+                transfer_modal.load($(this).attr('href'));
+                
+                transfer_callback = function() {
                     datalists[$('.datalist-schedules').attr('data-id')].refresh();
                 };
             });

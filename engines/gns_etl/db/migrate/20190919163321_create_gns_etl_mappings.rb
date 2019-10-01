@@ -4,9 +4,9 @@ class CreateGnsEtlMappings < ActiveRecord::Migration[5.2]
       t.string :source_table
       t.string :source_field
       t.string :source_data_format
-      t.string :target_table
-      t.string :target_field
-      t.string :target_data_format
+      t.string :destination_table
+      t.string :destination_field
+      t.string :destination_data_format
       t.string :default_value
 
       t.timestamps

@@ -33,5 +33,13 @@ module GnsCore
     def format_percentage(num)
       "%g" % ("%.2f" % num)
     end
+    
+    #def numeric?
+    #  Float(self) != nil rescue false
+    #end
+    
+    def is_number?(object)
+      true if Float(object) rescue false
+    end
   end
 end

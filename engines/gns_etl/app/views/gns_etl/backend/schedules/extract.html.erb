@@ -1,0 +1,59 @@
+<% content_for :title do %>
+    Extract - <%= @schedule.name %>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.extract_data').submit(function(e) {
+                e.preventDefault();                
+                var form = $(this);
+                
+                // clear modal
+                extract_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                      showNotification(response.status, response.message);
+                      extract_modal.hide();
+                      
+                      // load task list
+                      if (typeof(extract_callback) !== 'undefined') {
+                        extract_callback();
+                      }
+                    } else {
+                      extract_modal.renderHtml(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-body">
+        <%= form_for '', url: gns_etl.extract_backend_schedules_path(id: @schedule.id), html: {multipart: false, class: 'extract_data'} do |f| %>
+            <h5>You want to copy this schedule</h5>
+            
+            <div class="form-group">
+                <input class="form-control <%= 'border-danger' if @schedule.errors.full_messages_for(:limit).present? %>"
+                    placeholder="Enter the limit on the number of records to transfer"
+                    name="limit"
+                />
+                <% if @schedule.errors.full_messages_for(:limit).present? %>
+                    <span class="form-text text-danger"><%= @schedule.errors.full_messages_for(:limit).join('<br/>').html_safe %></span>
+                <% end %>
+            </div>
+            
+            <div class="text-left">
+                <button type="submit" class="btn btn-primary"><%= t('.submit') %></button>
+            </div>
+        <% end %>
+    </div>
+</div>

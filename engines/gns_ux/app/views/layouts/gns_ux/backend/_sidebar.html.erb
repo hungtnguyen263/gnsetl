@@ -52,7 +52,8 @@
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"
                         data-menu="
-                            gns_etl/backend/data_transfers
+                            gns_etl/backend/data_transfers,
+                            gns_etl/backend/mappings
                         "
                     ><i class="icon-database4"></i> <span><%= 'DB.System' %></span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="DB.System">
@@ -62,7 +63,16 @@
                                     gns_etl/backend/data_transfers
                                 "
                             >
-                                DataTransformation.ETL
+                                Schedules
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<%= gns_etl.backend_mappings_path %>" class="nav-link"
+                                data-menu="
+                                    gns_etl/backend/mappings
+                                "
+                            >
+                                Mapping Infomation
                             </a>
                         </li>
                     </ul>

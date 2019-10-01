@@ -6,13 +6,25 @@ GnsEtl::Engine.routes.draw do
                     post 'list'
                 end
             end
+            resources :mappings do
+                collection do
+                    post 'list'
+                    get 'select_source_fields'
+                    get 'select_destination_fields'
+                end
+            end
             resources :schedules do
                 collection do
                     post 'list'
+                    get ':id/logs', to: 'schedules#logs', as: 'logs'
                     get 'start'
                     post 'start'
                     put 'stop'
-                    get ':id/logs', to: 'schedules#logs', as: 'logs'
+                    
+                    get 'extract'
+                    post 'extract'
+                    get 'transfer'
+                    post 'transfer'
                 end
             end
         end

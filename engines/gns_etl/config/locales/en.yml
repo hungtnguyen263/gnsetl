@@ -1,0 +1,37 @@
+en:
+  gns_etl:
+    backend:
+      mappings:
+        index:
+          mapping: "Mapping"
+          create_mapping: "Create Mapping"
+          mapping_list: "Mapping List"
+          placeholder_source_table: "Filter by Source table"
+          placeholder_destination_table: "Filter by Destination table"
+        list:
+          source_table: "Source table"
+          source_field: "Source field"
+          destination_table: "Destination table"
+          destination_field: "Destination field"
+          default_value: "Default value"
+          update: "Update"
+        new:
+          new_mapping: "New mapping"
+          details: "Details"
+        edit:
+          new_mapping: "New mapping"
+          details: "Details"
+        form:
+          source_table: "Source table"
+          placeholder_source_table: "Select source table"
+          destination_table: "Destination table"
+          placeholder_destination_table: "Select destination table"
+          default_value: "Default value"
+          placeholder_default_value: "Enter default value"
+        select_source_fields:
+          source_field: "Source field"
+          placeholder_source_field: "Select source field"
+        select_destination_fields:
+          destination_field: "Destination field"
+          placeholder_destination_field: "Select destination field"
+          

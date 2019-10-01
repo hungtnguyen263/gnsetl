@@ -1,0 +1,15 @@
+<div class="form-group">
+    <label class="d-block"><%= t('.source_field') %> <span class="text-danger">*</span></label>
+    <select class="form-control selectAllowClear"
+        data-container-css-class="font-weight-semibold"
+        data-placeholder="<%= t('.placeholder_source_field') %>"
+        name="mapping[source_field]"
+    >
+        <option></option>
+        <% options = GnsEtl::Mapping::source_fields(source_table: "DN2018") %>
+        <% options.each do |option| %>
+            <option  value="<%= option[:value] %>"><%= option[:text] %></option>
+        <% end %>
+         <!--'selected' if option[:value] == @mapping.source_field %>-->
+    </select>
+</div>

@@ -1,0 +1,100 @@
+
+
+
+
+
+<div class="form-group">
+    <label class="d-block"><%= t('.source_field') %></label>
+    <select class="form-control font-weight-semibold select-ajax"
+        data-container-css-class="font-weight-semibold"
+        data-placeholder="<%= t('.placeholder_source_field') %>"
+        data-url="<%= gns_etl.source_fields_backend_mappings_path %>"
+        name="mapping[source_field]"
+    >
+        <option value="<%= mapping.source_field %>"><%= mapping.source_field %></option>
+    </select>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            // Select2 ajax /source fields
+            $('select[name="mapping[source_table]"]').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    dropdownParent: $(this).parent(),
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                source_table: $('select[name="mapping[source_table]"]').selectw('val'),
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            
+            //$('select[name="contact[district_id]"]').each(function() {
+            //    var url = $(this).attr('data-url');
+            //    
+            //    $(this).select2({
+            //        allowClear: true,
+            //        dropdownParent: $(this).parent(),
+            //        ajax: {
+            //            url: url,
+            //            dataType: 'json',
+            //            data: function (params) {
+            //                console.log(params);
+            //                var query = {
+            //                    q: params.term,
+            //                    page: params.page,
+            //                    type: 'public',
+            //                    state_id: $('select[name="contact[country_id]"]').select2('val'),
+            //                    state_id: $('select[name="contact[state_id]"]').select2('val')
+            //                }
+            //          
+            //                // Query parameters will be ?search=[term]&type=public
+            //                return query;
+            //            }
+            //        }
+            //    }); 
+            //});
+            
+            $('select[name="mapping[source_table]"]').change(function() {
+                $('select[name="mapping[source_field]"]').val(null).trigger('change');
+            });
+            
+            //$('select[name="contact[country_id]"]').change(function() {
+            //    $('select[name="contact[state_id]').val(null).trigger('change');
+            //    $('select[name="contact[district_id]').val(null).trigger('change');
+            //});
+        });
+    </script>
+<% end %>

@@ -1,0 +1,50 @@
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-info-700">
+            <th><%= t('.source_table') %></th>
+            <th><%= t('.source_field') %></th>
+            <th><%= t('.destination_table') %></th>
+            <th><%= t('.destination_field') %></th>
+            <th><%= t('.default_value') %></th>
+            <th class="text-right"><%= t('actions') %></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @mappings.each do |mapping| %>
+            <tr>
+                <td><%= mapping.source_table %></td>
+                <td><%= mapping.source_field %></td>
+                <td><%= mapping.destination_table %></td>
+                <td><%= mapping.destination_field %></td>
+                <td><%= mapping.default_value %></td>
+                <td class="text-right">
+                    <div class="list-icons">
+                        <div class="dropdown">
+                            <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                <i class="icon-menu9"></i>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item edit-mapping-button"
+                                    href="<%= gns_etl.edit_backend_mapping_path(mapping) %>">
+                                    <i class="icon-pencil7"></i> <%= t('.update') %>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div class="pagination-area">
+    <div class="page_entries_info">
+        <!-- Showing 1 to 10 of 19 entries -->
+        <%= page_entries_info @mappings %>
+    </div>
+
+    <div class="pagination_style paging_simple_numbers">
+        <%= will_paginate @mappings, previous_label: 'Prev'.html_safe, next_label: 'Next'.html_safe, renderer: BootstrapPagination::Rails, class: 'align-self-center' %>
+    </div>
+</div>

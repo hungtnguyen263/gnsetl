@@ -1,0 +1,158 @@
+<% content_for :title do %>
+     <%= t('.mapping') %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('home') %></a>
+    <span class="breadcrumb-item active"><%= t('.mapping') %></span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t('.mapping') %></span></h4>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <a class="btn btn-primary add-mapping-button" href="<%= gns_etl.new_backend_mapping_path %>">
+        <b><i class="icon-plus22"></i></b> <%= t('.create_mapping') %>
+    </a>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        // global modal
+        var mapping_modal = new gModal({size: 'md'});
+        var updateMappingCallback;
+        var newMappingCallback;
+        
+        $(function() {            
+            $('.add-mapping-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                mapping_modal.load(button.attr('href'));
+                
+                newMappingCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // hide modal
+                        mapping_modal.hide();
+                        
+                        datalists[$('.datalist-mappings').attr('data-id')].refresh();          
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        mapping_modal.renderHtml(response);
+                    }
+                };
+            });
+            
+            $(document).on('click', '.edit-mapping-button', function(e) {
+                e.preventDefault();
+                
+                var but = $(this);
+                
+                // load modal edit
+                mapping_modal.load(but.attr('href'));
+                
+                // after update event
+                updateMappingCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // hide modal
+                        mapping_modal.hide();
+                        
+                        datalists[but.closest('.datalist').attr('data-id')].refresh();
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        mapping_modal.renderHtml(response);
+                    }           
+                }
+                    
+            });
+        });
+    </script>
+<% end %>
+
+<!-- Datatable -->
+<div class="card datalist datalist-mappings"
+    data-url="<%= gns_etl.list_backend_mappings_path %>"
+>
+    <div class="card-header header-elements-inline">
+        <h5 class="card-title"><%= t('.mapping_list') %></h5>
+        <div class="header-elements">
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    
+    <form class="datalist-filters">
+        <div class="card-body pb-0">
+            <div class="row">
+                <div class="col-md-3">
+                    <select class="form-control selectAllowClear"
+                        data-placeholder="<%= t(".placeholder_source_table") %>"
+                        name="source_table"
+                    >
+                        <option></option>
+                        <% options = GnsEtl::Mapping::source_tables %>
+                        <% options.each do |option| %>
+                            <option value="<%= option[:value] %>"><%= option[:text] %></option>
+                        <% end %>
+                    </select>
+                </div>
+                
+                <div class="col-md-3">
+                    <select class="form-control selectAllowClear"
+                        data-placeholder="<%= t(".placeholder_destination_table") %>"
+                        name="destination_table"
+                    >
+                        <option></option>
+                        <% options = GnsEtl::Mapping::destination_tables %>
+                        <% options.each do |option| %>
+                            <option value="<%= option[:value] %>"><%= option[:text] %></option>
+                        <% end %>
+                    </select>
+                </div>
+                
+                <div class="col-md-1 text-right">
+                    <span class="btn btn-primary mb-3 datalist-search-button"><%= t('go') %></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-body">
+            <div class="datalist-header flex space-between">
+                <div class="keyword-search mr-2">
+                    <input class="form-control keyword-input" name="keyword" type="search" placeholder="<%= t('keyword_search') %>">
+                </div>
+                <div class="text-right text-nowrap flex">
+                    <div class="sort-by-box flex align-center mr-3">
+                        <span class="mr-1"><%= t('sort_by') %>:</span>
+                        <select name="sort_by" data-placeholder="<%= t('sort_by') %>" class="form-control selectPrimary sort-by-select" data-fouc>
+                            <option value="created_at"><%= t('.created_at') %></option>
+                            <option value="name"><%= t('.name') %></option>
+                        </select>
+                        <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
+                    </div>
+                    <div class="show-per-page flex align-center">
+                        <span class="mr-1"><%= t('per_page') %>:</span>
+                        <select name="per_page" class="form-control selectPrimary per-page-select">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>  
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="datalist-content">
+            
+        </div>
+    </form>
+</div>

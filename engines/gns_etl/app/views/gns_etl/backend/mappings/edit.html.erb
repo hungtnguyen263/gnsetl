@@ -1,0 +1,69 @@
+<% content_for :title do %>
+   <%= t('.edit_mapping') %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('.home') %></a>
+    <a href="<%= gns_etl.backend_mappings_path %>" class="breadcrumb-item"><%= t('.mappings') %></a>
+    <span class="breadcrumb-item active"><%= t('.edit') %></span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t('.mapping') %></span> - <%= t('.edit') %></h4>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <a class="btn btn-primary" href="<%= gns_etl.new_backend_mapping_path %>">
+        <b><i class="icon-plus22"></i></b> <%= t('.create_mapping') %>
+    </a>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.edit_mapping').submit(function(e) {
+                e.preventDefault();
+                
+                var form = $(this);
+                
+                // clear modal
+                mapping_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    // do something
+                    if (typeof(updateMappingCallback) !== 'undefined') {
+                        updateMappingCallback(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+        
+<% if @mapping.errors.any? %>
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+        <span class="font-weight-semibold">Oh snap!</span> Check a few things up (below) and try submitting again.
+    </div>
+<% end %>
+
+<div class="card">
+    <div class="card-header header-elements-inline bg-white">
+        <h5 class="card-title"><%= t('.details') %></h5>
+        <div class="header-elements">
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <%= render 'form', mapping: @mapping %>
+    </div>
+</div>
