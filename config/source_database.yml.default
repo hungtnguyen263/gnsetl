@@ -1,0 +1,10 @@
+default: &default
+  adapter: sqlserver
+  host: hostname_or_ip
+  port: 1433
+  username: username/sa
+  password: password
+
+development:
+  <<: *default
+  database: source_db_name

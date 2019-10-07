@@ -30,6 +30,8 @@ Gemfile.lock
 /config/master.key
 
 /config/database.yml
+/config/source_database.yml
+/config/destination_database.yml
 
 # Ignore application configuration
 /config/application.yml
