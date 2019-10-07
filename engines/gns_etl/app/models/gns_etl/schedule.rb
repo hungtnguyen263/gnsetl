@@ -78,7 +78,13 @@ module GnsEtl
         begin
           native_city = row[:native_city].to_s.split(/Tỉnh|Thành phố|Thành Phố/).map(&:strip).reject(&:empty?)[0]
           
-          province = DestinationDbBase.connection.exec_query("SELECT * FROM \"Provinces\" WHERE \"Name\" LIKE '%#{native_city}%'").first
+          province_name = native_city
+          dmap_province = GnsEtl::DataMapping.where(d_table: 'Provinces', d_field: 'Name', s_data: native_city).first
+          province_name = dmap_province.d_data if !dmap_province.nil?
+          logger.info '========Province========'
+          logger.info province_name
+          
+          province = DestinationDbBase.connection.exec_query("SELECT * FROM \"Provinces\" WHERE \"Name\" LIKE '%#{province_name}%'").first
           provinceID = province["Id"]
           provinceCode = province["ProvinceCode"]
           
@@ -95,7 +101,13 @@ module GnsEtl
         begin
           native_district = row[:native_district].split(/Huyện|Quận|Thị xã|Thị Xã|Thành phố|Thành Phố|Tp|TP/).map(&:strip).reject(&:empty?)[0]
           
-          district = DestinationDbBase.connection.exec_query("SELECT * FROM \"Districts\" WHERE \"Name\" LIKE '%#{native_district}%' AND \"ProvinceCode\" = '#{provinceCode}'").first
+          district_name = native_district
+          dmap_district = GnsEtl::DataMapping.where(d_table: 'Districts', d_field: 'Name', s_data: native_district).first
+          district_name = dmap_district.d_data if !dmap_district.nil?
+          logger.info '========District========'
+          logger.info district_name
+          
+          district = DestinationDbBase.connection.exec_query("SELECT * FROM \"Districts\" WHERE \"Name\" LIKE '%#{district_name}%' AND \"ProvinceCode\" = '#{provinceCode}'").first
           districtID = district["Id"]
           
           # add districtID to hash
