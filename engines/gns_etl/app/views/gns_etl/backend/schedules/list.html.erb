@@ -1,22 +1,21 @@
 <table class="table table-hover">
     <thead>
-        <tr>
-            <th>#ID</th>
+        <tr class="bg-info-700">
             <th>Name</th>
             <th>Start</th>
             <th>End</th>
-            <th>Status</th>
             <th>Comment</th>
+            <th>Status</th>
             <th class="text-right">Actions</th>
         </tr>
     </thead>
     <tbody>
         <% @schedules.each do |schedule| %>
             <tr>
-                <td>#<%= schedule.id %></td>
                 <td><%= schedule.name %></td>
                 <td><%= schedule.start_time.strftime('%d/%m/%Y - %H:%M:%S') if schedule.start_time.present? %></td>
                 <td><%= schedule.end_time.strftime('%d/%m/%Y - %H:%M:%S') if schedule.end_time.present? %></td>
+                <td><%= schedule.comment %></td>
                 <td>
                     <% if schedule.status == GnsEtl::Schedule::STATUS_NEW %>
                         <label class="badge badge-primary">New</label>
@@ -38,7 +37,6 @@
                         <label class="badge badge-warning">Not Started</label>
                     <% end %>
                 </td>
-                <td><%= schedule.comment %></td>
                 <td class="text-right">
                     <div class="list-icons">
                         <div class="dropdown">
@@ -63,7 +61,7 @@
                                 <% end %>
                                 
                                 <% if schedule.status == GnsEtl::Schedule::STATUS_NEW %>
-                                    <a class="dropdown-item load-csv-schedule-button"
+                                    <a class="dropdown-item edit-schedule-button"
                                         href="<%= gns_etl.edit_backend_schedule_path(schedule) %>">
                                         <i class="icon-pencil7"></i> <%= t('.update') %>
                                     </a>
@@ -90,3 +88,14 @@
         <% end %>
     </tbody>
 </table>
+
+<div class="pagination-area">
+    <div class="page_entries_info">
+        <!-- Showing 1 to 10 of 19 entries -->
+        <%= page_entries_info @schedules %>
+    </div>
+
+    <div class="pagination_style paging_simple_numbers">
+        <%= will_paginate @schedules, previous_label: 'Prev'.html_safe, next_label: 'Next'.html_safe, renderer: BootstrapPagination::Rails, class: 'align-self-center' %>
+    </div>
+</div>

@@ -11,88 +11,13 @@
     <h4><i class="icon-users mr-2"></i> <span class="font-weight-semibold">Data Transfer</span></h4>
 <% end %>
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h3 class="panel-inside-title">Source Infomation</h3>
-                <form>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Server Name</label>
-                                <input type="text" class="form-control" placeholder="Server name" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Database</label>
-                                <input type="text" class="form-control" placeholder="Database name" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Login</label>
-                                <input type="email" class="form-control" placeholder="Your email address" />
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Your password" />
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-sm bg-primary pull-right">Connect SourceDB</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <h3 class="panel-inside-title">Destination Infomation</h3>
-                <form>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Server Name</label>
-                                <input type="text" class="form-control" placeholder="Server name" />
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Database</label>
-                                <input type="text" class="form-control" placeholder="Database name" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Login</label>
-                                <input type="email" class="form-control" placeholder="Your email address" />
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control" placeholder="Your password" />
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-sm bg-primary pull-right">Connect DestinationDB</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<% content_for :page_toolbar do %>
+    <a class="btn btn-primary add-schedule-button" href="<%= gns_etl.new_backend_schedule_path %>">
+        <b><i class="icon-plus22"></i></b>New Schedule
+    </a>
+<% end %>
 
+<!-- Datatable -->
 <div class="card datalist datalist-schedules"
     data-url="<%= gns_etl.list_backend_schedules_path %>"
 >
@@ -100,11 +25,6 @@
         <h3 class="card-title"><%= 'Schedules' %></h3>
         
         <div class="header-elements">
-            <a href="<%= gns_etl.new_backend_schedule_path %>"
-                class="btn btn-sm bg-blue add-schedule-button mr-5">
-                <i class="icon-plus22 mr-1"></i> New Schedule
-            </a>
-            
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
             </div>
@@ -112,6 +32,34 @@
     </div>
     
     <form class="datalist-filters">
+        <div class="card-body">
+            <div class="datalist-header flex space-between">
+                <div class="keyword-search mr-2">
+                    <input class="form-control keyword-input" name="keyword" type="search" placeholder="<%= t('keyword_search') %>">
+                </div>
+                <div class="text-right text-nowrap flex">
+                    <div class="sort-by-box flex align-center mr-3">
+                        <span class="mr-1"><%= t('sort_by') %>:</span>
+                        <select name="sort_by" data-placeholder="<%= t('sort_by') %>" class="form-control selectPrimary sort-by-select">
+                            <option value="created_at">CreatedDate</option>
+                            <option value="start_time">StartDate</option>
+                            <option value="end_time">EndDate</option>
+                        </select>
+                        <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
+                    </div>
+                    <div class="show-per-page flex align-center">
+                        <span class="mr-1"><%= t('per_page') %>:</span>
+                        <select name="per_page" class="form-control selectPrimary per-page-select">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
         <div class="datalist-content">
             
         </div>

@@ -9,7 +9,7 @@ module GnsEtl
   
       # GET /schedules
       def list
-        @schedules = Schedule.all.order(:id)
+        @schedules = Schedule.search(params).search(params).paginate(:page => params[:page], :per_page => params[:per_page])
         
         render layout: nil
       end
