@@ -1,5 +1,4 @@
 <%= form_for([gns_etl, :backend, mapping]) do |f| %>
-
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -81,12 +80,15 @@
             destination_fields_box.load();
             
             $('select[name="mapping[source_table]"]').change(function() {
-                //$('select[name="mapping[source_table]"]').select2('val')
-                $('select[name="mapping[source_field]"]').val(null).trigger('change');
+                var s_table = $('select[name="mapping[source_table]"]').select2('val')
+                source_fields_box.url = '<%= gns_etl.select_source_fields_backend_mappings_path %>?s_table=' + s_table
+                source_fields_box.load();
             });
             
             $('select[name="mapping[destination_table]"]').change(function() {
-                $('select[name="mapping[destination_field]"]').val(null).trigger('change');
+                var d_table = $('select[name="mapping[destination_table]"]').select2('val')
+                destination_fields_box.url = '<%= gns_etl.select_destination_fields_backend_mappings_path %>?d_table=' + d_table
+                destination_fields_box.load();
             });
         });
     </script>

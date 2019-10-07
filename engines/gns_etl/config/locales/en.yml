@@ -34,4 +34,14 @@ en:
         select_destination_fields:
           destination_field: "Destination field"
           placeholder_destination_field: "Select destination field"
-          
+      schedules:
+        logs:
+          logs: "Logs"
+          log: "Log"
+          schedule_logs: "Schedule Logs"
+        form:
+          source_file: "Source file"
+          placeholder_source_file: "Select the source file"
+        list:
+          load_csv: "Load CSV"
+          load_csv_confirm: "Do you want to load data from scv to target database"

@@ -7,6 +7,7 @@ require "carrierwave"
 require "mini_magick"
 require "rubyXL"
 require 'rubyXL/convenience_methods'
+require 'csv'
 require 'figaro'
 require 'delayed_job_active_record'
 require 'sidekiq'

@@ -4,17 +4,17 @@
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('home') %></a>
-    <a href="<%= gns_etl.backend_schedules_path %>" class="breadcrumb-item"> Schedules</a>
-    <span class="breadcrumb-item active"><%= t('.logs') %></span>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Schedules</a>
+    <span class="breadcrumb-item active"><%= @schedule.name %>: <%= t('.logs') %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-history mr-2"></i> <span class="font-weight-semibold"><%= t('.logs') %>: <%= @schedule.name %></span></h4>
+    <h4><i class="icon-history mr-2"></i> <span class="font-weight-semibold"><%= t('.log') %></span></h4>
 <% end %>
 
 <!-- Datatable -->
 <div class="card datalist datalist-mappings"
-    data-url="<%= gns_etl.logs_list_backend_schedules_path %>"
+    data-url="<%= gns_etl.list_backend_logs_path %>"
 >
     <div class="card-header header-elements-inline">
         <h5 class="card-title"><%= t('.schedule_logs') %></h5>
@@ -35,7 +35,7 @@
                     <div class="sort-by-box flex align-center mr-3">
                         <span class="mr-1"><%= t('sort_by') %>:</span>
                         <select name="sort_by" data-placeholder="<%= t('sort_by') %>" class="form-control selectPrimary sort-by-select">
-                            <option value="logtime">LogTime</option>
+                            <option value="time_log">TimeLog</option>
                         </select>
                         <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
                     </div>
@@ -44,7 +44,7 @@
                         <select name="per_page" class="form-control selectPrimary per-page-select">
                             <option value="10">10</option>
                             <option value="25">25</option>
-                            <option value="50">50</option>
+                            <option value="50">50</option>  
                             <option value="100">100</option>
                         </select>
                     </div>

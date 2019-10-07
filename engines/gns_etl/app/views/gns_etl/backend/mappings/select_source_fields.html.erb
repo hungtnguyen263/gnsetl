@@ -6,10 +6,12 @@
         name="mapping[source_field]"
     >
         <option></option>
-        <% options = GnsEtl::Mapping::source_fields(source_table: "DN2018") %>
-        <% options.each do |option| %>
-            <option  value="<%= option[:value] %>"><%= option[:text] %></option>
-        <% end %>
-         <!--'selected' if option[:value] == @mapping.source_field %>-->
+        <% options = GnsEtl::Mapping::source_fields(source_table: params[:s_table]) %>
+        <% if !options.empty? %>
+            <% options.each do |option| %>
+                <option  value="<%= option[:value] %>"><%= option[:text] %></option>
+            <% end %>
+             <!--'selected' if option[:value] == @mapping.source_field %>-->
+         <% end %>
     </select>
 </div>

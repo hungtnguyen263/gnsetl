@@ -3,12 +3,9 @@ module GnsEtl
     has_many :logs, class_name: 'GnsEtl::Log'
     has_many :transfer_rows, class_name: 'GnsEtl::TransferRow', foreign_key: :schedule_id
     
+    validates :name, :s_file, presence: true
+    
     # const
-    #STATUS_NEW = 1
-    STATUS_INPROCESSING = 8
-    STATUS_COMPLETE = 9
-    #STATUS_CANCELED = 4
-    #STATUS_FAILED = 5
     STATUS_NEW = 1
     STATUS_COPYING = 2
     STATUS_COPIED = 3
@@ -16,6 +13,8 @@ module GnsEtl
     STATUS_TRANSFERRED = 5
     STATUS_CANCELED = 6
     STATUS_FAILED = 7
+    STATUS_INPROCESSING = 8
+    STATUS_COMPLETE = 9
     
     # add new log
     def log(message=nil, success)
@@ -55,6 +54,135 @@ module GnsEtl
           log.error StandardError.new("[CompanyInfos] Insert into table values are ignored (line: #{count}) - #{e.message}") # Add log to file log
           self.log("[CompanyInfos] Insert into table values are ignored (line: #{count}) - ERROR: #{e.message}", false) # Add gns_etl_logs table
         end
+      end
+      
+      # update information
+      update_attributes(end_time: Time.now, status: Schedule::STATUS_COMPLETE)
+    end
+    
+    # get source files
+    def self.source_file_options
+      folder_path = File.join(Rails.root, "../source_datas")
+      files = Dir.children(folder_path)
+      
+      options = []
+      options = files.map {|f| {text: f, value: folder_path + '/' + f}}
+      
+      return options
+    end
+    
+    # Lay Id cua Khu vuc trong TargetDatabase
+    def get_area(row)
+      area = {}
+      begin
+        begin
+          native_city = row[:native_city].to_s.split(/Tỉnh|Thành phố|Thành Phố/).map(&:strip).reject(&:empty?)[0]
+          
+          province = DestinationDbBase.connection.exec_query("SELECT * FROM \"Provinces\" WHERE \"Name\" LIKE '%#{native_city}%'").first
+          provinceID = province["Id"]
+          provinceCode = province["ProvinceCode"]
+          
+          # add provinceID to hash
+          area[:provinceID] = provinceID
+        rescue => error
+          # Log failed
+          self.log(
+            "[#{row[:native_city].to_s} (CompanyCode: #{row[:ent_internal_code]} - CompanyName: #{row[:vietnamese_name]})] - Cannot find province/city matching database of system => #{error.message}",
+            false
+          )
+        end
+        
+        begin
+          native_district = row[:native_district].split(/Huyện|Quận|Thị xã|Thị Xã|Thành phố|Thành Phố|Tp|TP/).map(&:strip).reject(&:empty?)[0]
+          
+          district = DestinationDbBase.connection.exec_query("SELECT * FROM \"Districts\" WHERE \"Name\" LIKE '%#{native_district}%' AND \"ProvinceCode\" = '#{provinceCode}'").first
+          districtID = district["Id"]
+          
+          # add districtID to hash
+          area[:districtID] = districtID
+        rescue => error
+          # Log failed
+          self.log(
+            "[#{row[:native_district].to_s} (CompanyCode: #{row[:ent_internal_code]} - CompanyName: #{row[:vietnamese_name]})] - Cannot find district matching database of system => #{error.message}",
+            false
+          )
+        end
+      rescue => error
+        # Log failed
+        self.log(
+          "[CompanyCode: #{row[:ent_internal_code]} - CompanyName: #{row[:vietnamese_name]}] - #{error.message}",
+          false
+        )
+      end
+      
+      return area
+    end
+    
+    # import CSV file
+    def import_csv(options={})
+      file = self.s_file
+      options = {headers: true, :row_sep => "\r\n", :col_sep => "','", header_converters: :symbol, converters: %i[date], :quote_char => "\x00"}
+      
+      update_attributes(start_time: Time.now, status: Schedule::STATUS_INPROCESSING)
+      begin
+        # Run the loop through each line of the file
+        CSV.foreach(file, "rb:bom|utf-8", options) do |row|
+          begin
+            # get id province on DestinationDB
+            area = self.get_area(row)
+            
+            # Query insert into Companies table
+            query_insert_into_companies = "INSERT INTO \"Companies\" (\"Id\", \"CompanyCode\", \"Name\", \"TaxNumber\", \"PhoneNumber\""
+            query_insert_into_companies += ", \"Email\", \"WebSite\", \"Fax\", \"Address\", \"DistrictId\", \"ProvinceId\")"
+            query_insert_into_companies += " VALUES ("
+            query_insert_into_companies += "'#{SecureRandom.uuid}', '#{row[:ent_internal_code]}'"
+            query_insert_into_companies += ", '#{row[:vietnamese_name]}', '#{row[:ent_tax_code]}'"
+            query_insert_into_companies += ", '#{row[:ho_phone]}', '#{row[:ho_email]}'"
+            query_insert_into_companies += ", '#{row[:ho_url]}', '#{row[:ho_fax]}'"
+            query_insert_into_companies += ", '#{row[:native_address]}', '#{area[:districtID]}', '#{area[:provinceID]}'"
+            query_insert_into_companies += ")"
+            #query_insert_into_companies += " ON CONFLICT (\"CompanyCode\") DO NOTHING" # G::InvalidColumnReference: ERROR:  there is no unique or exclusion constraint matching the ON CONFLICT specification
+            
+            
+            #DestinationDbBase.connection.exec_query(query_insert_into_companies)
+            
+            exist = DestinationDbBase.connection.exec_query("SELECT COUNT(*) FROM \"Companies\" WHERE \"CompanyCode\" = '#{row[:ent_internal_code]}';").first["count"]
+            if exist == 0
+              begin
+                DestinationDbBase.connection.exec_query(query_insert_into_companies)
+                # Log success
+                self.log(
+                  "#{query_insert_into_companies}: record imported!",
+                  true
+                )
+              rescue => error
+                # Log failed => Lỗi trong quá trình ghi (insert) dữ liệu
+                self.log(
+                  "[Cann't import data from csv file] - #{query_insert_into_companies} => #{error.message}",
+                  false
+                )
+              end
+            else
+              # Log failed => Cảnh báo trùng data
+              self.log(
+                "[CompanyCode: #{row[:ent_internal_code]} - CompanyName: #{row[:vietnamese_name]}] - This record already exists",
+                false
+              )
+            end
+          rescue => error
+            # Log failed => Lỗi trong quá trình đọc và insert dữ liệu
+            self.log(
+              "[CompanyCode: #{row[:ent_internal_code]} - CompanyName: #{row[:vietnamese_name]}] ERROR - #{error.message}",
+              false
+            )
+          end
+        end # het 1 vong lap cua moi row trong csv
+      rescue => error
+        # Log failed => Ghi lỗi trên từng row của file csv
+        self.log(
+          "[CSV FILE ERROR] - #{error.message}",
+          false
+        )
       end
       
       # update information
@@ -157,16 +285,16 @@ module GnsEtl
     
           # inser 1 row to 1 d_table
           begin
-            DestinationDbBase.connection.execute("INSERT INTO '#{table[0]}' (#{columns.map(&:inspect).join(',')}) VALUES (#{values.map(&:inspect).join(',')})")   # ON CONFLICT (code) DO NOTHING;
+            DestinationDbBase.connection.execute("INSERT INTO \"#{table[0]}\" (\"Id\", #{columns.map(&:inspect).join(', ')}) VALUES ('#{SecureRandom.uuid}', '#{values.join("', '")}')")   # ON CONFLICT (code) DO NOTHING;
             # Log success
             self.log(
-              "Insert into #{table[0]} (#{columns.join(',')}) values (#{values.join(',')}): record transferred!",
+              "Insert into #{table[0]} (#{columns.join(',')}) values (#{values.map(&:inspect).join(',')}): record transferred!",
               true
             )
           rescue => e
             # Log falied
             self.log(
-              "[Insert into #{table[0]} (#{columns.join(',')}) values (#{values.join(',')})]: transfer failed:  - ERROR: #{e.message}",
+              "[Insert into #{table[0]} (#{columns.join(',')}) values (#{values.map(&:inspect).join(',')})]: transfer failed:  - ERROR: #{e.message}",
               false
             )
             

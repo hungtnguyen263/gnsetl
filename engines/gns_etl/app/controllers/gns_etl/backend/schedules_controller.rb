@@ -3,8 +3,9 @@ module GnsEtl
     class SchedulesController < GnsCore::Backend::BackendController
       include GnsCore::ApplicationHelper
       
-      before_action :set_schedule, only: [:edit, :update, :logs,
-                                          :start, :extract, :transfer]
+      before_action :set_schedule, only: [:edit, :update, :logs, :logs_list,
+                                          :start, :extract, :transfer,
+                                          :load_csv]
   
       # GET /schedules
       def list
@@ -13,9 +14,15 @@ module GnsEtl
         render layout: nil
       end
   
-      # GET /schedules/1
+      # GET /schedule/1/logs
       def logs
-        @logs = @schedule.logs
+      end
+  
+      # GET /logs
+      def logs_list
+        @logs = @schedule.logs.search(params).paginate(:page => params[:page], :per_page => params[:per_page])
+        
+        render layout: nil
       end
   
       # GET /schedules/new
@@ -116,6 +123,18 @@ module GnsEtl
           end
         end
       end
+      
+      # Load csv to destination_db
+      def load_csv
+        #authorize! :load_csv, @schedule
+        
+        #@schedule.load_csv
+        GnsEtl::WorkerLoadCSV.perform_later(@schedule, {}) #if @schedule.status == GnsEtl::Schedule::STATUS_NEW
+        render json: {
+          status: 'notice',
+          message: 'Schedule is loading CSV file.',
+        }
+      end
   
       private
         # Use callbacks to share common setup or constraints between actions.
@@ -125,7 +144,7 @@ module GnsEtl
   
         # Only allow a trusted parameter "white list" through.
         def schedule_params
-          params.fetch(:schedule, {}).permit(:name)
+          params.fetch(:schedule, {}).permit(:name, :s_file)
         end
     end
   end

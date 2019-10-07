@@ -6,10 +6,13 @@
         name="mapping[destination_field]"
     >
         <option></option>
-        <% options = GnsEtl::Mapping::destination_fields(destination_table: "Companies") %>
-        <% options.each do |option| %>
-            <option  value="<%= option[:value] %>"><%= option[:text] %></option>
+        <% options = GnsEtl::Mapping::destination_fields(destination_table: params[:d_table]) %>
+        
+        <% if options.present? %>
+            <% options.each do |option| %>
+                <option  value="<%= option[:value] %>"><%= option[:text] %></option>
+            <% end %>
+             <!--'selected' if option[:value] == mapping.destination_field %>-->
         <% end %>
-         <!--'selected' if option[:value] == mapping.destination_field %>-->
     </select>
 </div>

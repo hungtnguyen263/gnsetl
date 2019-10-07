@@ -28,6 +28,10 @@
                         <label class="badge badge-info">Transferring</label>
                     <% elsif schedule.status == GnsEtl::Schedule::STATUS_TRANSFERRED %>
                         <label class="badge badge-success">Transferred</label>
+                    <% elsif schedule.status == GnsEtl::Schedule::STATUS_COMPLETE %>
+                        <label class="badge badge-success">Complete</label>
+                    <% elsif schedule.status == GnsEtl::Schedule::STATUS_INPROCESSING %> 
+                        <label class="badge badge-info">In Processing</label>
                     <% elsif schedule.status == GnsEtl::Schedule::STATUS_CANCELED %>
                         <label class="badge badge-danger">Canceled</label>
                     <% elsif schedule.status == GnsEtl::Schedule::STATUS_FAILED %>
@@ -43,20 +47,37 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right">
-                                <% if schedule.status == GnsEtl::Schedule::STATUS_NEW %>
-                                    <a class="dropdown-item extract-data-button"
-                                        href="<%= gns_etl.extract_backend_schedules_path(id: schedule) %>">
-                                        <i class="icon-copy4"></i> Extract
-                                    </a>
+                                <% if false %>
+                                    <% if schedule.status == GnsEtl::Schedule::STATUS_NEW %>
+                                        <a class="dropdown-item extract-data-button"
+                                            href="<%= gns_etl.extract_backend_schedules_path(id: schedule) %>">
+                                            <i class="icon-copy4"></i> Extract
+                                        </a>
+                                    <% end %>
+                                    <% if schedule.status == GnsEtl::Schedule::STATUS_COPIED %>
+                                        <a class="dropdown-item transfer-data-button"
+                                            href="<%= gns_etl.transfer_backend_schedules_path(id: schedule) %>">
+                                            <i class="icon-loop4"></i> Load/Transfer
+                                        </a>
+                                    <% end %>
                                 <% end %>
-                                <% if schedule.status == GnsEtl::Schedule::STATUS_COPIED %>
-                                    <a class="dropdown-item transfer-data-button"
-                                        href="<%= gns_etl.transfer_backend_schedules_path(id: schedule) %>">
-                                        <i class="icon-loop4"></i> Load/Transfer
+                                
+                                <% if schedule.status == GnsEtl::Schedule::STATUS_NEW %>
+                                    <a class="dropdown-item load-csv-schedule-button"
+                                        href="<%= gns_etl.edit_backend_schedule_path(schedule) %>">
+                                        <i class="icon-pencil7"></i> <%= t('.update') %>
+                                    </a>
+                                    
+                                    <a class="dropdown-item ajax datalist-g-link"
+                                        href="<%= gns_etl.load_csv_backend_schedules_path(id: schedule) %>"
+                                        data-method="PUT"
+                                        data-confirm="<%= t('.load_csv_confirm')%>"
+                                    >
+                                        <i class="icon-database-insert"></i> <%= t('.load_csv')%>
                                     </a>
                                 <% end %>
                                 <% if schedule.status != GnsEtl::Schedule::STATUS_NEW %>
-                                    <a class="dropdown-item start-schedule-button"
+                                    <a class="dropdown-item"
                                         href="<%= gns_etl.logs_backend_schedules_path(schedule) %>">
                                         <i class="icon-history"></i> View Logs
                                     </a>

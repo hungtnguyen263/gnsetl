@@ -17,9 +17,12 @@ GnsEtl::Engine.routes.draw do
                 collection do
                     post 'list'
                     get ':id/logs', to: 'schedules#logs', as: 'logs'
+                    post ':id/logs_list', to: 'schedules#logs_list', as: 'logs_list'
                     get 'start'
                     post 'start'
+                    
                     put 'stop'
+                    put 'load_csv'
                     
                     get 'extract'
                     post 'extract'
